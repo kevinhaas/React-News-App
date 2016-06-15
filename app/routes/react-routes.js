@@ -11,6 +11,6 @@ import Footer from "../components/footer";
 export default (
 	<Route>
 			<Route path="/" component={Home} />
-			<Route path="/boop" component={Footer} />
+			<Route path="/footer" component={Footer} />
 	</Route>
 );
