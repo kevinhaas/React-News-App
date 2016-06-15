@@ -43,22 +43,23 @@ gutil.log("Gulp Started!");
  |--------------------------------------------------------------------------
  */
 
-// gulp.task("logs1", function() {
-// 	fs.stat("logs", function(err, stat) {
-// 		if (err == null) {
-// 			gutil.log("LogFolder Exists");
-// 		}
-//
-// 		else {
-// 			gutil.log("LogFolder Does Not Exist, Creating Now");
-// 			fs.mkdir("logs", { mode: "666" });
-// 			gutil.log("LogFolder Created!");
-// 		}
-// 	});
-// });
+// checks for log dir on launch, will create if it doesn't exist
+gulp.task("logDir", function() {
+	fs.stat("logs", function(err, stat) {
+		if (err == null) {
+			gutil.log("LogDir Exists");
+		}
+
+		else {
+			gutil.log("LogDir Does Not Exist, Creating Now");
+			fs.mkdir("logs", { mode: "666" });
+			gutil.log("LogDir Created!");
+		}
+	});
+});
 
 // currently watches for files changes, make it so it only watches for a delete? also mkdir for logs if doesn't exist
-gulp.task("logs", function() {
+gulp.task("logFile", function() {
 	fs.stat("logs/all-logs.log", function(err, stat) {
 		if (err == null) {
 			gutil.log("LogFile Exists");
@@ -168,8 +169,8 @@ gulp.task("styles", function() {
 
 gulp.task("watch", function() {
 	gulp.watch("app/stylesheets/**/*.less", ["styles"]);
-	gulp.watch("logs/**/*.log", ["logs"]);
+	gulp.watch("logs/*.log", ["logs"]);
 });
 
-gulp.task("default", ["logs", "styles", "vendor", "browserify-watch", "watch"]);
-gulp.task("build", ["logs", "styles", "vendor", "browserify"]);
+gulp.task("default", ["logDir", "logFile", "styles", "vendor", "browserify-watch", "watch"]);
+gulp.task("build", ["logDir", "logFile", "styles", "vendor", "browserify"]);
