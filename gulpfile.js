@@ -2,6 +2,8 @@
  * Created by Kevo on 6/13/2016.
  */
 
+// .less build/watch currently disabled at the bottom and removed from build/default tasks
+
 const gulp         = require("gulp"),
 	  gutil        = require("gulp-util"),
 	  gulpif       = require("gulp-if"),
@@ -153,24 +155,25 @@ gulp.task("browserify-watch", ["browserify-vendor"], function() {
 	}
 });
 
-/*
- |--------------------------------------------------------------------------
- | Compile LESS stylesheets.
- |--------------------------------------------------------------------------
- */
-gulp.task("styles", function() {
-	return gulp.src("app/stylesheets/main.less")
-		.pipe(plumber())
-		.pipe(less())
-		.pipe(autoprefixer())
-		.pipe(gulpif(production, cssmin()))
-		.pipe(gulp.dest("public/css"));
-});
+// /*
+//  |--------------------------------------------------------------------------
+//  | Compile LESS stylesheets.
+//  |--------------------------------------------------------------------------
+//  */
+// gulp.task("styles", function() {
+// 	return gulp.src("app/stylesheets/main.less")
+// 		.pipe(plumber())
+// 		.pipe(less())
+// 		.pipe(autoprefixer())
+// 		.pipe(gulpif(production, cssmin()))
+// 		.pipe(gulp.dest("public/css"));
+// });
 
 gulp.task("watch", function() {
-	gulp.watch("app/stylesheets/**/*.less", ["styles"]);
-	gulp.watch("logs/*.log", ["logs"]);
+	// gulp.watch("app/stylesheets/**/*.less", ["styles"]);
+	gulp.watch("logs/*.log", ["logFile"]);
+	gulp.watch("logs", ["logDir"]);
 });
 
-gulp.task("default", ["logDir", "logFile", "styles", "vendor", "browserify-watch", "watch"]);
-gulp.task("build", ["logDir", "logFile", "styles", "vendor", "browserify"]);
+gulp.task("default", ["logDir", "logFile", "vendor", "browserify-watch", "watch"]);
+gulp.task("build", ["logDir", "logFile", "vendor", "browserify"]);

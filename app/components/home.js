@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import {Link} from "react-router";
+// import {Link} from "react-router";
 // import HomeStore from "../stores/HomeStore";
 // import HomeActions from "../actions/HomeActions";
 
@@ -12,7 +12,7 @@ class Home extends React.Component {
 	// 	super(props);
 	// 	this.state = HomeStore.getState();
 	// 	this.onChange = this.onChange.bind(this);
-	// }
+	// }e
 	//
 	// componentDidMount() {
 	// 	HomeStore.listen(this.onchange);
@@ -36,9 +36,8 @@ class Home extends React.Component {
 			<div className="test">
 				Heyo
 			</div>
-		)
-	}
-
+		);
+	};
 }
 
 export default Home;

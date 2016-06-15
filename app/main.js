@@ -10,4 +10,10 @@ import routes from "./routes/react-routes";
 
 let history = createBrowserHistory();
 
-ReactDOM.render(<Router history={history}>{routes}</Router>, document.getElementById("app"));
+ReactDOM.render(
+	<Router history={history}>
+		{routes}
+	</Router>,
+
+	document.getElementById("app")
+);
