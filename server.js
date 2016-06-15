@@ -12,14 +12,8 @@ const express        = require("express"),
 	  mongoose       = require("mongoose"),
 	  cfg            = require("./cfgs/kevcfg");
 
-const swig           = require("swig"),
-	  React          = require("react"),
-	  ReactDOM       = require("react-dom/server"),
-	  Router         = require("react-router"),
-	  routes         = require("./app/routes/react-routes");
-
 const moment = require("moment"),
-	  now  = moment().format();
+	  now    = moment().format();
 
 // MONGO CONNECTION //
 mongoose.connect(cfg.mongoUrl, cfg.dbCfg);
@@ -72,24 +66,7 @@ app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
 // ROUTES //
 app.use("/", require("./app/routes/api-routes"));
-
-// SERVER SIDE RENDERING //
-app.use(function(req, res) {
-	Router.match({ routes: routes.default, location: req.url }, function (err, redirectLocation, renderProps) {
-		if (err) {
-			res.status(500).send(err.message);
-		} else if (redirectLocation) {
-			res.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
-		} else if (renderProps) {
-			var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
-			var page = swig.renderFile("./public/views/index.html", { html: html });
-			res.status(200).send(page);
-		} else {
-			res.status(404).send("404 - Page Not Found");
-		}
-	})
-});
-
+app.use("/", require("./app/routes/html-routes"));
 
 // event listener for HTTP server "error" event
 function onError(error) {
