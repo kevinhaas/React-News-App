@@ -3,26 +3,26 @@
  */
 
 const gulp         = require("gulp"),
-	gutil        = require("gulp-util"),
-	gulpif       = require("gulp-if"),
-	autoprefixer = require("gulp-autoprefixer"),
-	cssmin       = require("gulp-cssmin"),
-	less         = require("gulp-less"),
-	concat       = require("gulp-concat"),
-	plumber      = require("gulp-plumber"),
-	buffer       = require("vinyl-buffer"),
-	source       = require("vinyl-source-stream"),
-	babelify     = require("babelify"),
-	browserify   = require("browserify"),
-	watchify     = require("watchify"),
-	uglify       = require("gulp-uglify"),
-	sourcemaps   = require("gulp-sourcemaps"),
-	eslint       = require("gulp-eslint");
+	  gutil        = require("gulp-util"),
+	  gulpif       = require("gulp-if"),
+	  autoprefixer = require("gulp-autoprefixer"),
+	  cssmin       = require("gulp-cssmin"),
+	  less         = require("gulp-less"),
+	  concat       = require("gulp-concat"),
+	  plumber      = require("gulp-plumber"),
+	  buffer       = require("vinyl-buffer"),
+	  source       = require("vinyl-source-stream"),
+	  babelify     = require("babelify"),
+	  browserify   = require("browserify"),
+	  watchify     = require("watchify"),
+	  uglify       = require("gulp-uglify"),
+	  sourcemaps   = require("gulp-sourcemaps"),
+	  eslint       = require("gulp-eslint");
 
 const logger = require("./cfgs/logger"),
-	fs     = require("fs"),
-	moment = require("moment"),
-	now    = moment().format();
+	  fs     = require("fs"),
+	  moment = require("moment"),
+	  now    = moment().format();
 
 const production = process.env.NODE_ENV === "production";
 
@@ -171,5 +171,5 @@ gulp.task("watch", function() {
 	gulp.watch("logs/**/*.log", ["logs"]);
 });
 
-gulp.task("default", ["styles", "logs", "vendor", "browserify-watch", "watch"]);
-gulp.task("build", ["styles", "logs", "vendor", "browserify"]);
+gulp.task("default", ["logs", "styles", "vendor", "browserify-watch", "watch"]);
+gulp.task("build", ["logs", "styles", "vendor", "browserify"]);
