@@ -1,0 +1,8 @@
+/*
+ * Created by Kevo on 6/14/2016.
+ */
+
+NYT SEARCH
+----------
+* Save Articles/Add notes
+* Add less?

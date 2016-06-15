@@ -1,0 +1,77 @@
+{
+  "name": "react-eve-app",
+  "version": "1.0.0",
+  "description": "React news article search utilizing the New York Times API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "author": "kevin haas",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinhaas/React-News-App.git"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "dependencies": {
+    "alt": "^0.17.8",
+    "async": "^1.5.0",
+    "axios": "^0.12.0",
+    "body-parser": "^1.14.1",
+    "colors": "^1.1.2",
+    "compression": "^1.6.0",
+    "eslint": "^2.11.1",
+    "eslint-plugin-react": "^5.1.1",
+    "express": "^4.13.3",
+    "express-winston": "^1.4.1",
+    "graceful-fs": "^4.1.4",
+    "gulp-eslint": "^2.0.0",
+    "history": "^1.13.0",
+    "lodash": "^4.13.1",
+    "moment": "^2.13.0",
+    "mongoose": "^4.2.5",
+    "morgan": "^1.6.1",
+    "nodemon": "^1.9.2",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-router": "^1.0.0",
+    "request": "^2.65.0",
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.3.7",
+    "swig": "^1.4.2",
+    "underscore": "^1.8.3",
+    "winston": "^2.2.0",
+    "xml2js": "^0.4.15"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.1.19",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babel-register": "^6.3.13",
+    "babelify": "^7.2.0",
+    "bower": "^1.6.5",
+    "browserify": "^12.0.1",
+    "eslint": "^2.11.1",
+    "eslint-plugin-react": "^5.1.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-if": "^2.0.0",
+    "gulp-less": "^3.0.3",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-util": "^3.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.0"
+  },
+  "license": "MIT"
+}
