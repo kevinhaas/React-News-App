@@ -43,7 +43,7 @@ gutil.log("Gulp Started!");
  |--------------------------------------------------------------------------
  */
 
-// checks for log dir on launch, will create if it doesn't exist
+// checks on build and watches for logDir, will create if it doesn't exist
 gulp.task("logDir", function() {
 	fs.stat("logs", function(err, stat) {
 		if (err == null) {
@@ -58,7 +58,7 @@ gulp.task("logDir", function() {
 	});
 });
 
-// currently watches for files changes, make it so it only watches for a delete? also mkdir for logs if doesn't exist
+// checks on build and watches for logFile, will create if it doesn't exist. make it so it only watches for a delete to cut down spam?
 gulp.task("logFile", function() {
 	fs.stat("logs/all-logs.log", function(err, stat) {
 		if (err == null) {
