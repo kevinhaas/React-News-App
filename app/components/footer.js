@@ -6,10 +6,26 @@ import React from "react";
 import {Link} from "react-router";
 
 class Footer extends React.Component {
-	// constructor(props) {
-	// 	super(props);
-	// }
+	constructor(props) {
+		super(props);
+		this.onChange = this.onChange.bind(this);
+	}
 
+	componentDidMount() {
+		console.log("footer component mounted!");
+	}
+
+	componentWillUnmount() {
+		console.log("footer component unMounted")
+	}
+
+	onChange(state) {
+		this.setState(state);
+	}
+
+	handleClick() {
+		// details here
+	}
 
 	render() {
 		return(

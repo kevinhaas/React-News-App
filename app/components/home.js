@@ -8,28 +8,26 @@ import React from "react";
 // import HomeActions from "../actions/HomeActions";
 
 class Home extends React.Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = HomeStore.getState();
-	// 	this.onChange = this.onChange.bind(this);
-	// }e
-	//
-	// componentDidMount() {
-	// 	HomeStore.listen(this.onchange);
-	// 	// actions to be fired
-	// }
-	//
-	// componentWillUnmount() {
-	// 	HomeStore.unlisten(this.onChange);
-	// }
-	//
-	// onChange(state) {
-	// 	this.setState(state);
-	// }
-	//
-	// handleClick() {
-	// 	// details here
-	// }
+	constructor(props) {
+		super(props);
+		this.onChange = this.onChange.bind(this);
+	}
+
+	componentDidMount() {
+		console.log("home page component mounted!");
+	}
+
+	componentWillUnmount() {
+		console.log("home page component unMounted")
+	}
+
+	onChange(state) {
+		this.setState(state);
+	}
+
+	handleClick() {
+		// details here
+	}
 
 	render() {
 		return (
