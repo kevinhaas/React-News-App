@@ -15,6 +15,7 @@ class Home extends React.Component {
 
 	componentDidMount() {
 		console.log("home page component mounted!");
+		// load recently bookmarked articles
 	}
 
 	componentWillUnmount() {
@@ -56,10 +57,8 @@ class Home extends React.Component {
 								<img src="http://placehold.it/64x64" />
 							</a>
 							<div className="media-body">
-								<h4 className="media-heading"></h4>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus
-								odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-								Donec lacinia congue felis in faucibus.
+								<h4 className="media-heading">Article Title</h4>
+								<small>Article Body</small>
 							</div>
 						</div>
 
