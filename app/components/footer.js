@@ -24,21 +24,16 @@ class Footer extends React.Component {
 	}
 
 	handleClick() {
-		// details here
+		console.log("click test");
 	}
 
 	render() {
 		return(
-			<div className="test">
+			<div onClick={this.handleClick.bind(this)} className="test">
 				this is the f00ter
 			</div>
 		)
 	}
-
-
-
-
-
 }
 
 export default Footer;
