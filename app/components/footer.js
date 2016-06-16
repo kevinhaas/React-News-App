@@ -29,7 +29,7 @@ class Footer extends React.Component {
 
 	render() {
 		return(
-			<div onClick={this.handleClick.bind(this)} className="test">
+			<div onClick={this.handleClick} className="test">
 				this is the f00ter
 			</div>
 		)
