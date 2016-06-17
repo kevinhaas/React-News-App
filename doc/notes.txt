@@ -5,4 +5,7 @@
 NYT SEARCH
 ----------
 * Save Articles/Add notes
+* most favorited article page?
 * Add less?
+* pagination
+* load to most recent articles on componentDidMount
