@@ -1,5 +1,5 @@
 /*
- * Created by Kevo on 6/14/2016.
+ * Created by Kevo on 6/17/2016.
  */
 
 import React from "react";
@@ -31,25 +31,25 @@ class Home extends React.Component {
 
 	render() {
 
-			return (
-				<div id="searchBody">
+		return (
+			<div id="searchBody">
 
-					<div className="jumbotron">
-						<div className="container">
-							<h1 id="title">React NYT Article Search</h1>
-						</div>
-					</div>
-
-					<div className="panel panel-default" id="searchPanel">
-						<div className="panel-body">
-
-							<label htmlFor="searchQuery">Search Articles by Keyword:</label>
-							<input type="text" name="searchQuery" className="form-control"/>
-
-						</div>
+				<div className="jumbotron">
+					<div className="container">
+						<h1 id="title">React NYT Article Search</h1>
 					</div>
 				</div>
-			);
+
+				<div className="panel panel-default" id="searchPanel">
+					<div className="panel-body">
+
+						<label htmlFor="searchQuery">Search Articles by Keyword:</label>
+						<input type="text" name="searchQuery" className="form-control"/>
+
+					</div>
+				</div>
+			</div>
+		);
 	};
 }
 

@@ -3,13 +3,14 @@
  */
 
 import React from "react";
-import Home from "../components/home";
+import NavBar from "../components/navbar";
+// import Home from "../components/home";
 
 class App extends React.Component {
 	render() {
 		return(
 			<div>
-				<Home history={this.props.history} />
+				<NavBar history={this.props.history} />
 				{this.props.children}
 			</div>
 		);
