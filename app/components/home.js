@@ -12,8 +12,7 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			headline: [],
-			body: []
+			headline: []
 		}
 	}
 
@@ -26,22 +25,29 @@ class Home extends React.Component {
 		axios.get(url)
 			.then((res) => {
 				console.log(res.data.response.docs);
-				var response = [];
 
-				for (var i = 0; i < res.data.response.docs.length; i++) {
-					var test = res.data.response.docs[i];
+				var headlineRes = [];
+				// var articleRes = [];
 
-					response.push(test.headline.main);
-					console.log(response);
+				// for (var i = 0; i < res.data.response.docs.length; i++) {
+				//
+				// 	var test = res.data.response.docs[i];
+
+					// headlineRes.push(res.data.response.docs);
+					// console.log(headlineRes);
+					// articleRes.push(test.snippet);
+
+					// console.log(test.headline.main);
+					// console.log(test.snippet);
 
 					// console.log(test.headline.main);
 					// console.log(test.snippet);
 
 					this.setState({
-						headline: response,
-						body: test.snippet
+						headline: res.data.response.docs
+						// body: test.snippet
 					})
-				}
+				// }
 			})
 			.catch((err) => {
 				console.error(err);
@@ -69,10 +75,10 @@ class Home extends React.Component {
 
 		console.log(this.state);
 
-		let articleList = this.state.headline.map((head, index) => {
+		var articleList = this.state.headline.map((head, index) => {
 
 				return (
-					<div id="searchBody">
+					<div key={head._id} id="searchBody">
 
 						<div className="jumbotron">
 							<div className="container">
@@ -93,13 +99,16 @@ class Home extends React.Component {
 							<div className="panel-body">
 
 								<div className="media">
+
 									<a className="media-left" href="#">
 										<img src="http://placehold.it/64x64"/>
 									</a>
+
 									<div className="media-body">
+
 										<h4>INDEX {index +1}</h4>
-										<h4 className="media-heading">{head}</h4>
-										<small>{this.state.body}</small>
+										<h4 className="media-heading">{head.headline.main}</h4>
+										<small>{head.snippet}</small>
 
 									</div>
 								</div>
