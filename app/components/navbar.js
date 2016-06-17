@@ -34,15 +34,24 @@ class NavBar extends React.Component {
 			<Navbar inverse>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<a href="#"><strong>NYT Search</strong></a>
+						<a href="#">
+							<strong id="navTitle">NYT Search
+							<br />
+							<small>powered by React</small>
+							</strong>
+						</a>
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
 				<Navbar.Collapse>
-					<Nav>
-						<NavItem eventKey={1} href="#">Favorites</NavItem>
-					</Nav>
+					<form className="navbar-form navbar-left" role="search">
+						<div className="form-group">
+							<input type="text" className="form-control" placeholder="Begin news search..." />
+						</div>
+						<button type="submit" className="btn btn-default">Search</button>
+					</form>
 					<Nav pullRight>
+						<NavItem eventKey={1} href="#">Favorites</NavItem>
 						<NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Tech</MenuItem>
 							<MenuItem eventKey={3.2}>Music</MenuItem>

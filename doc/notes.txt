@@ -9,3 +9,4 @@ NYT SEARCH
 * Add less?
 * pagination
 * load to most recent articles on componentDidMount
+* get bootstrap bundled

@@ -89,7 +89,9 @@ class Home extends React.Component {
 
 		return (
 			<div className="container">
-				<h3 className="text-center">WIP</h3>
+				<div className="text-center">
+					<img id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
+				</div>
 				<div className="row">
 					{articleList}
 				</div>
