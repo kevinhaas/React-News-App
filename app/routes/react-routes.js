@@ -4,13 +4,15 @@
 
 import React from "react";
 import {Route} from "react-router";
-import Home from "../components/home";
+import App from "../components/app";
+import ArticleList from "../components/article-list";
 import Footer from "../components/footer";
 
 // define paths for you components here
 export default (
 	<Route>
-			<Route path="/" component={Home} />
-			<Route path="/footer" component={Footer} />
+		<Route component={App}>
+			<Route path="/" component={ArticleList} />
+		</Route>
 	</Route>
 );
