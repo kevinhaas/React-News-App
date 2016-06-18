@@ -125,18 +125,20 @@ class articleList extends React.Component {
 
 							<div className="media">
 
+								{head.multimedia.length === 0 ?
+
+									<a className="media-left">
+										<img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
+									</a>
+
+									:
+
+									<a className="media-left">
+										<img className="resImg" src={"https://nytimes.com/" + head.multimedia[0].url} />
+									</a>
+								}
+
 								<div className="media-body">
-
-										{head.multimedia.length === 0 ?
-
-											<p>no pic</p>
-
-												:
-
-											<a className="media-left" href="#">
-												<img id="resImg" src={"https://nytimes.com/" + head.multimedia[0].url} />
-											</a>
-										}
 
 									<h4>INDEX {index +1}</h4>
 									<h4 className="media-heading">{head.headline.main}</h4>
@@ -153,22 +155,27 @@ class articleList extends React.Component {
 		});
 
 		return (
-			<div className="container">
-				<div className="text-center">
-					<img onClick={this.handleClick.bind(this)} id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
-				</div>
+			<div className="wrapper">
+				<div className="container">
 
-				<form className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit.bind(this)}>
-					<div className="form-group">
-						<input type="text" className="form-control" placeholder="Begin news search..." value={this.state.inputValue} onChange={this.onChange.bind(this)} />
+					<div className="text-center">
+
+						<img onClick={this.handleClick.bind(this)} id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
+
+						<form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
+							<div className="form-group">
+								<input type="text" className="form-control" placeholder="Begin news search..." value={this.state.inputValue} onChange={this.onChange.bind(this)} />
+							</div>
+							<button type="submit" className="btn btn-default">Search</button>
+						</form>
+
 					</div>
-					<button type="submit" className="btn btn-default">Search</button>
-				</form>
 
-				<div className="row">
-					{articleRender}
+					<div className="row">
+						{articleRender}
+					</div>
+
 				</div>
-
 			</div>
 		);
 	};

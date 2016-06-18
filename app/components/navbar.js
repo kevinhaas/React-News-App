@@ -49,7 +49,7 @@ class NavBar extends React.Component {
 			<Navbar inverse>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<a href="#">
+						<a href="/">
 							<strong id="navTitle">NYT Search
 							<br />
 							<small>powered by React</small>
