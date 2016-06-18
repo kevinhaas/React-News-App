@@ -13,3 +13,4 @@ NYT SEARCH
 * socket.io display user count
 * collapse navabar on serach when it's in hamburger mode
 * error when no articles found
+* recent search list
