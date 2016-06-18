@@ -8,7 +8,7 @@ import axios from "axios";
 // import HomeStore from "../stores/HomeStore";
 // import HomeActions from "../actions/HomeActions";
 
-class Home extends React.Component {
+class articleList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -17,6 +17,26 @@ class Home extends React.Component {
 	}
 
 	getLatestArticles() {
+		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+		url += '?' + $.param({
+				'api-key': "fe6f6fe9125b4c14b9ab13721eaf350e"
+			});
+
+		axios.get(url)
+			.then((res) => {
+				console.log(res.data.response.docs);
+
+				this.setState({
+					headline: res.data.response.docs
+					// body: test.snippet
+				});
+			})
+			.catch((err) => {
+				console.error(err);
+			})
+	}
+
+	getSearchArticles() {
 		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 		url += '?' + $.param({
 				'api-key': "fe6f6fe9125b4c14b9ab13721eaf350e"
@@ -68,7 +88,7 @@ class Home extends React.Component {
 							<div className="media">
 
 								<a className="media-left" href="#">
-									<img src="http://placehold.it/64x64"/>
+									<img id="resImg" src={"https://nytimes.com/" + head.multimedia[0].url} />
 								</a>
 
 								<div className="media-body">
@@ -101,4 +121,4 @@ class Home extends React.Component {
 	};
 }
 
-export default Home;
+export default articleList;

@@ -10,3 +10,4 @@ NYT SEARCH
 * pagination
 * load to most recent articles on componentDidMount
 * get bootstrap bundled
+* socket.io display user count

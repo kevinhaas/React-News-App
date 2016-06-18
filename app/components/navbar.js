@@ -10,6 +10,9 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
 class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			inputValue: []
+		}
 	}
 
 	componentDidMount() {
@@ -20,12 +23,19 @@ class NavBar extends React.Component {
 		console.log("home page component unMounted")
 	}
 
-	onChange(state) {
-		this.setState(state);
+	onChange(e) {
+		this.setState({ inputValue: e.target.value });
+		console.log(this.state.inputValue)
 	}
 
-	handleClick() {
-		// details here
+	handleSubmit(event) {
+
+		console.log("TEST");
+
+		// let searchQuery = this.state.searchQuery.trim();
+
+		// this.state.searchQuery.trim();
+
 	}
 
 	render() {
@@ -44,9 +54,9 @@ class NavBar extends React.Component {
 					<Navbar.Toggle />
 				</Navbar.Header>
 				<Navbar.Collapse>
-					<form className="navbar-form navbar-left" role="search">
+					<form className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit.bind(this)}>
 						<div className="form-group">
-							<input type="text" className="form-control" placeholder="Begin news search..." />
+							<input type="text" className="form-control" placeholder="Begin news search..." value={this.state.inputValue} onChange={this.onChange.bind(this)} />
 						</div>
 						<button type="submit" className="btn btn-default">Search</button>
 					</form>
