@@ -25,12 +25,15 @@ class NavBar extends React.Component {
 
 	onChange(e) {
 		this.setState({ inputValue: e.target.value });
+
+		console.log(this.props.inputValue);
 		console.log(this.state.inputValue)
 	}
 
 	handleSubmit(event) {
 
-		console.log("TEST");
+		event.preventDefault();
+		console.log(this.state.inputValue);
 
 		// let searchQuery = this.state.searchQuery.trim();
 
@@ -39,6 +42,8 @@ class NavBar extends React.Component {
 	}
 
 	render() {
+
+		console.log(this.state);
 
 		return (
 			<Navbar inverse>

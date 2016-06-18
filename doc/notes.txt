@@ -11,3 +11,4 @@ NYT SEARCH
 * load to most recent articles on componentDidMount
 * get bootstrap bundled
 * socket.io display user count
+* collapse navabar on serach when it's in hamburger mode
