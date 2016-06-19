@@ -4,14 +4,9 @@
 
 NYT SEARCH
 ----------
-* Save Articles/Add notes on handleClick
-* most favorited article page?
-* Add less?
-* pagination
-* load to most recent articles on componentDidMount
-* get bootstrap bundled
+* IF article results < 0, display toastr: "no results found"
+* Save Articles/Add notes to mongo on handleClick
+* user favorite article page
 * socket.io display user count
-* collapse navabar on serach when it's in hamburger mode
-* error when no articles found
-* recent search list
-* IF article results < 0, display no results found message
+* recent search list - mongo field that is an array with recent user searches pushes into it, maybe past 10?
+* pagination
