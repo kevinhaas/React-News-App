@@ -37,7 +37,6 @@ const dependencies = [
 ];
 
 gutil.log("Gulp Started!");
-// logger.info("Gulp Started!");
 
 /*
  |--------------------------------------------------------------------------
@@ -60,7 +59,8 @@ gulp.task("logDir", function() {
 	});
 });
 
-// checks on build and watches for logFile, will create if it doesn't exist. make it so it only watches for a delete to cut down spam?
+// checks on build and watches for logFile, will create if it doesn't exist
+// TODO: make it so it only watches for a delete to cut down spam?
 gulp.task("logFile", function() {
 	fs.stat("logs/all-logs.log", function(err, stat) {
 		if (err == null) {
@@ -170,7 +170,7 @@ gulp.task("styles", function() {
 });
 
 gulp.task("watch", function() {
-	// gulp.watch("app/stylesheets/**/*.less", ["styles"]);
+	gulp.watch("app/stylesheets/**/*.less", ["styles"]);
 	gulp.watch("logs/*.log", ["logFile"]);
 	gulp.watch("logs", ["logDir"]);
 });
