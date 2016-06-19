@@ -155,19 +155,19 @@ gulp.task("browserify-watch", ["browserify-vendor"], function() {
 	}
 });
 
-// /*
-//  |--------------------------------------------------------------------------
-//  | Compile LESS stylesheets.
-//  |--------------------------------------------------------------------------
-//  */
-// gulp.task("styles", function() {
-// 	return gulp.src("app/stylesheets/main.less")
-// 		.pipe(plumber())
-// 		.pipe(less())
-// 		.pipe(autoprefixer())
-// 		.pipe(gulpif(production, cssmin()))
-// 		.pipe(gulp.dest("public/css"));
-// });
+/*
+ |--------------------------------------------------------------------------
+ | Compile LESS stylesheets.
+ |--------------------------------------------------------------------------
+ */
+gulp.task("styles", function() {
+	return gulp.src("app/stylesheets/main.less")
+		.pipe(plumber())
+		.pipe(less())
+		.pipe(autoprefixer())
+		.pipe(gulpif(production, cssmin()))
+		.pipe(gulp.dest("public/css"));
+});
 
 gulp.task("watch", function() {
 	// gulp.watch("app/stylesheets/**/*.less", ["styles"]);
@@ -175,5 +175,5 @@ gulp.task("watch", function() {
 	gulp.watch("logs", ["logDir"]);
 });
 
-gulp.task("default", ["logDir", "logFile", "vendor", "browserify-watch", "watch"]);
-gulp.task("build", ["logDir", "logFile", "vendor", "browserify"]);
+gulp.task("default", ["logDir", "styles", "logFile", "vendor", "browserify-watch", "watch"]);
+gulp.task("build", ["logDir", "styles", "logFile", "vendor", "browserify"]);

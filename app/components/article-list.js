@@ -166,7 +166,7 @@ class articleList extends React.Component {
 							<div className="form-group">
 								<input type="text" className="form-control" placeholder="Begin news search..." value={this.state.inputValue} onChange={this.onChange.bind(this)} />
 							</div>
-							<button type="submit" className="btn btn-default">Search</button>
+							<button type="submit" className="btn btn-default" id="searchBtn">Search</button>
 						</form>
 
 					</div>

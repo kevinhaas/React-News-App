@@ -47,7 +47,9 @@ class NavBar extends React.Component {
 
 		return (
 			<Navbar inverse>
+
 				<Navbar.Header>
+
 					<Navbar.Brand>
 						<a href="/">
 							<strong id="navTitle">NYT Search
@@ -56,16 +58,15 @@ class NavBar extends React.Component {
 							</strong>
 						</a>
 					</Navbar.Brand>
+
 					<Navbar.Toggle />
+
 				</Navbar.Header>
+
 				<Navbar.Collapse>
-					<form className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit.bind(this)}>
-						<div className="form-group">
-							<input type="text" className="form-control" placeholder="Begin news search..." value={this.state.inputValue} onChange={this.onChange.bind(this)} />
-						</div>
-						<button type="submit" className="btn btn-default">Search</button>
-					</form>
+
 					<Nav pullRight>
+
 						<NavItem eventKey={1} href="#">Favorites</NavItem>
 						<NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Tech</MenuItem>
@@ -75,8 +76,11 @@ class NavBar extends React.Component {
 							<MenuItem divider />
 							<MenuItem eventKey={3.3}>Add Category</MenuItem>
 						</NavDropdown>
+
 					</Nav>
+
 				</Navbar.Collapse>
+
 			</Navbar>
 		);
 	};

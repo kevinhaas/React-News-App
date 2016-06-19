@@ -14,3 +14,4 @@ NYT SEARCH
 * collapse navabar on serach when it's in hamburger mode
 * error when no articles found
 * recent search list
+* IF article results < 0, display no results found message
