@@ -5,14 +5,12 @@
 import React from "react";
 import axios from "axios";
 import {Link} from "react-router";
-// import HomeStore from "../stores/HomeStore";
-// import HomeActions from "../actions/HomeActions";
 
 class articleList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			headline: [],
+			articleRes: [],
 			inputValue: []
 		}
 	}
@@ -21,18 +19,19 @@ class articleList extends React.Component {
 
 		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 			url += "?" + $.param({
-					"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
-					"q": "phish"
+					"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
 			});
 
-		axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fe6f6fe9125b4c14b9ab13721eaf350e")
+		axios.get(url)
 			.then((res) => {
+
 				console.log(res.data.response.docs);
-				// console.log(url);
 
 				this.setState({
-					headline: res.data.response.docs
+					articleRes: res.data.response.docs,
+					inputValue: ""
 				});
+
 			})
 			.catch(function (error) {
 				if (error.response) {
@@ -54,17 +53,19 @@ class articleList extends React.Component {
 		// "q": searchQuery
 
 
-		// var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-		// 	url += "?" + $.param({
-		// 		"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
-		// 	});
+		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+			url += "?" + $.param({
+				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
+				"q"      : this.state.inputValue
+			});
 
-		axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fe6f6fe9125b4c14b9ab13721eaf350e&q=" + this.state.inputValue)
+		axios.get(url)
 			.then((res) => {
 				console.log(res.data.response.docs);
 
 				this.setState({
-					headline: res.data.response.docs
+					articleRes: res.data.response.docs,
+					inputValue: ""
 				});
 			})
 			.catch(function (error) {
@@ -107,15 +108,11 @@ class articleList extends React.Component {
 		this.getSearchArticles();
 	}
 
-// <a className="media-left" href="#">
-// <img id="resImg" src={"https://nytimes.com/" + head.multimedia[0].url} />
-// </a>
-
 	render() {
 
 		console.log(this.state);
 
-		let articleRender = this.state.headline.map((head, index) => {
+		let articleRender = this.state.articleRes.map((head, index) => {
 
 			return (
 				<div key={head._id} id="searchBody">
@@ -145,6 +142,7 @@ class articleList extends React.Component {
 									<small>{head.snippet}</small>
 
 								</div>
+
 							</div>
 
 						</div>
@@ -164,7 +162,7 @@ class articleList extends React.Component {
 
 						<form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
 							<div className="form-group">
-								<input type="text" className="form-control" placeholder="Begin news search..." value={this.state.inputValue} onChange={this.onChange.bind(this)} />
+								<input type="text" className="form-control" placeholder="Search the NYT" value={this.state.inputValue} onChange={this.onChange.bind(this)} />
 							</div>
 							<button type="submit" className="btn btn-default" id="searchBtn">Search</button>
 						</form>
