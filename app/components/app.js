@@ -4,6 +4,7 @@
 
 import React from "react";
 import NavBar from "../components/navbar";
+import ArticleList from "../components/article-list";
 
 class App extends React.Component {
 	render() {

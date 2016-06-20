@@ -4,9 +4,12 @@
 
 NYT SEARCH
 ----------
+* article title is a url link to the article
 * IF article results < 0, display toastr: "no results found"
 * Save Articles/Add notes to mongo on handleClick
-* user favorite article page
+* user favorite article page - this is where notes can be added
+* latest articles are from today?
+* share button copies article url to clipboard
 * socket.io display user count
 * recent search list - mongo field that is an array with recent user searches pushes into it, maybe past 10?
 * pagination

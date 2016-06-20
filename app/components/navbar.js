@@ -3,26 +3,35 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
 import {Link} from "react-router";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
+import ArticleList from "./article-list";
 
 class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
+			articleRes: [],
+			searchQuery: [],
+			propTest: "propTest"
 		}
 	}
 
 	componentDidMount() {
-		console.log("home page component mounted!");
+		console.log("navbar component mounted!");
 	}
 
 	componentWillUnmount() {
-		console.log("home page component unMounted")
+		console.log("navbar component unMounted")
 	}
 
 	onChange() {
+
+	}
+
+	handleClick() {
+		
 	}
 
 	handleSubmit(event) {
@@ -33,17 +42,19 @@ class NavBar extends React.Component {
 		console.log(this.state);
 
 		return (
+
 			<Navbar inverse>
 
 				<Navbar.Header>
 
 					<Navbar.Brand>
-						<a href="/">
+						<Link to="/">
 							<strong id="navTitle">NYT Search
 							<br />
 							<small>powered by React</small>
 							</strong>
-						</a>
+						</Link>
+
 					</Navbar.Brand>
 
 					<Navbar.Toggle />
@@ -54,6 +65,7 @@ class NavBar extends React.Component {
 
 					<Nav pullRight>
 
+						<NavItem eventKey={1} onClick={this.handleClick.bind(this)}>Latest</NavItem>
 						<NavItem eventKey={1} href="#">Favorites</NavItem>
 						<NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Tech</MenuItem>

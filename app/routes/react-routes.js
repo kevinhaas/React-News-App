@@ -10,9 +10,7 @@ import Footer from "../components/footer";
 
 // define paths for you components here
 export default (
-	<Route>
 		<Route component={App}>
 			<Route path="/" component={ArticleList} />
 		</Route>
-	</Route>
 );

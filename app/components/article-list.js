@@ -30,7 +30,7 @@ class articleList extends React.Component {
 
 	// just for testing right now //
 	handleClick() {
-		console.log(this.state.searchQuery)
+		console.log(this.props);
 	}
 
 	handleSubmit(event) {
@@ -126,7 +126,8 @@ class articleList extends React.Component {
 
 								<div className="media-body">
 
-									<h4>INDEX {index +1}</h4>
+									<i className="fa fa-heart" aria-hidden="true"></i>
+									<i className="fa fa-share-alt" aria-hidden="true"></i>
 									<h4 className="media-heading">{head.headline.main}</h4>
 									<small>{head.snippet}</small>
 
@@ -151,7 +152,7 @@ class articleList extends React.Component {
 
 						<form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
 							<div className="form-group">
-								<input type="text" className="form-control" placeholder="Search the NYT" value={this.state.searchQuery} onChange={this.onChange.bind(this)} />
+								<input ref="refTest" type="text" className="form-control" placeholder="Search the NYT" value={this.state.searchQuery} onChange={this.onChange.bind(this)} />
 							</div>
 							<button type="submit" className="btn btn-default" id="searchBtn">Search</button>
 						</form>
