@@ -11,75 +11,8 @@ class articleList extends React.Component {
 		super(props);
 		this.state = {
 			articleRes: [],
-			inputValue: []
+			searchQuery: []
 		}
-	}
-
-	getLatestArticles() {
-
-		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-			url += "?" + $.param({
-					"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
-			});
-
-		axios.get(url)
-			.then((res) => {
-
-				console.log(res.data.response.docs);
-
-				this.setState({
-					articleRes: res.data.response.docs,
-					inputValue: ""
-				});
-
-			})
-			.catch(function (error) {
-				if (error.response) {
-					// The request was made, but the server responded with a status code
-					// that falls out of the range of 2xx
-					console.error(error.response.data);
-					console.error(error.response.status);
-					console.error(error.response.headers);
-				} else {
-					// Something happened in setting up the request that triggered an Error
-					console.error('Error', error.message);
-				}
-			});
-	}
-
-	getSearchArticles() {
-
-		// let searchQuery = this.state.inputValue.toString();
-		// "q": searchQuery
-
-
-		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-			url += "?" + $.param({
-				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
-				"q"      : this.state.inputValue
-			});
-
-		axios.get(url)
-			.then((res) => {
-				console.log(res.data.response.docs);
-
-				this.setState({
-					articleRes: res.data.response.docs,
-					inputValue: ""
-				});
-			})
-			.catch(function (error) {
-				if (error.response) {
-					// The request was made, but the server responded with a status code
-					// that falls out of the range of 2xx
-					console.error(error.response.data);
-					console.error(error.response.status);
-					console.error(error.response.headers);
-				} else {
-					// Something happened in setting up the request that triggered an Error
-					console.error('Error', error.message);
-				}
-			});
 	}
 
 	componentDidMount() {
@@ -92,20 +25,76 @@ class articleList extends React.Component {
 	}
 
 	onChange(e) {
-		this.setState({ inputValue: e.target.value });
-
-		console.log(this.props.inputValue);
-		console.log(this.state.inputValue)
+		this.setState({ searchQuery: e.target.value });
 	}
 
+	// just for testing right now //
 	handleClick() {
-		console.log(this.state.inputValue)
+		console.log(this.state.searchQuery)
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state.inputValue);
+		console.log(this.state.searchQuery);
 		this.getSearchArticles();
+	}
+
+	// grabs latest articles on page load //
+	getLatestArticles() {
+
+		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+		url += "?" + $.param({
+				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
+			});
+
+		axios.get(url)
+			.then((res) => {
+				console.log(res.data.response.docs);
+
+				this.setState({
+					articleRes: res.data.response.docs,
+					searchQuery: ""
+				});
+			})
+			.catch(function (error) {
+				if (error.response) {
+					console.error(error.response.data);
+					console.error(error.response.status);
+					console.error(error.response.headers);
+				} else {
+					console.error("Error", error.message);
+				}
+			});
+	}
+
+	// fetches articles for the desired query //
+	// TODO: if articleRes === 0 then display no results message and prompt to search again //
+	getSearchArticles() {
+
+		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+		url += "?" + $.param({
+				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
+				"q"      : this.state.searchQuery
+			});
+
+		axios.get(url)
+			.then((res) => {
+				console.log(res.data.response.docs);
+
+				this.setState({
+					articleRes: res.data.response.docs,
+					searchQuery: ""
+				});
+			})
+			.catch(function (error) {
+				if (error.response) {
+					console.error(error.response.data);
+					console.error(error.response.status);
+					console.error(error.response.headers);
+				} else {
+					console.error("Error", error.message);
+				}
+			});
 	}
 
 	render() {
@@ -162,7 +151,7 @@ class articleList extends React.Component {
 
 						<form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
 							<div className="form-group">
-								<input type="text" className="form-control" placeholder="Search the NYT" value={this.state.inputValue} onChange={this.onChange.bind(this)} />
+								<input type="text" className="form-control" placeholder="Search the NYT" value={this.state.searchQuery} onChange={this.onChange.bind(this)} />
 							</div>
 							<button type="submit" className="btn btn-default" id="searchBtn">Search</button>
 						</form>

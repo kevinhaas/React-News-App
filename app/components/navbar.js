@@ -3,7 +3,6 @@
  */
 
 import React from "react";
-import axios from "axios";
 import {Link} from "react-router";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
 
@@ -11,7 +10,7 @@ class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			inputValue: []
+
 		}
 	}
 
@@ -23,22 +22,10 @@ class NavBar extends React.Component {
 		console.log("home page component unMounted")
 	}
 
-	onChange(e) {
-		this.setState({ inputValue: e.target.value });
-
-		console.log(this.props.inputValue);
-		console.log(this.state.inputValue)
+	onChange() {
 	}
 
 	handleSubmit(event) {
-
-		event.preventDefault();
-		console.log(this.state.inputValue);
-
-		// let searchQuery = this.state.searchQuery.trim();
-
-		// this.state.searchQuery.trim();
-
 	}
 
 	render() {
