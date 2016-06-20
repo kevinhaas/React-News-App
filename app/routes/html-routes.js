@@ -28,6 +28,7 @@ router.use(function (req, res) {
 		});
 	});
 
+// CLIENT SIDE RENDER ONLY //
 // router.route("/*")
 // 	.get(function (req, res) {
 // 		res.sendFile(process.cwd() + "/public/views/index.html");
