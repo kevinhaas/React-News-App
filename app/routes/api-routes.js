@@ -32,6 +32,11 @@ router.route("/favorites")
 			}
 		})
 
-});
+	})
+	.get(function (req, res) {
+
+		console.log("favorites GET route")
+		res.json("HEY")
+	});
 
 module.exports = router;
