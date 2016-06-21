@@ -1,5 +1,5 @@
 /*
- * Created by Kevo on 6/17/2016.
+ * Created by Kevo on 6/20/2016.
  */
 
 import React from "react";
@@ -7,7 +7,7 @@ import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
 import {Link} from "react-router";
 
-class ArticleList extends React.Component {
+class FavoriteList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,16 +22,15 @@ class ArticleList extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log("articleList component mounted!");
-		this.getLatestArticles();
+		console.log("favoriteList component mounted!");
+		this.getFavoriteArticles();
 	}
 
 	componentWillUnmount() {
-		console.log("articleList component unMounted")
+		console.log("favoriteList component unMounted")
 	}
 
-	onChange(e) {
-		this.setState({ searchQuery: e.target.value });
+	onChange() {
 	}
 	
 	handleClick(head) {
@@ -44,12 +43,12 @@ class ArticleList extends React.Component {
 			snippet: head.snippet,
 			url: head.web_url
 		})
-		.then(function (res) {
-			console.log(res);
-		})
-		.catch(function (err) {
-			console.log(err);
-		})
+			.then(function (res) {
+				console.log(res);
+			})
+			.catch(function (err) {
+				console.log(err);
+			})
 
 	}
 
@@ -156,8 +155,8 @@ class ArticleList extends React.Component {
 									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}></i>
 
 									<CopyToClipboard text={head.web_url}
-										onCopy={() => this.setState({copied: true})}>
-									<i className="fa fa-share-alt" aria-hidden="true"></i>
+									                 onCopy={() => this.setState({copied: true})}>
+										<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
 
 									<a href={head.web_url} target="#blank"><h4 className="media-heading">{head.headline.main}</h4></a>
@@ -201,4 +200,4 @@ class ArticleList extends React.Component {
 	};
 }
 
-export default ArticleList;
+export default articleList;

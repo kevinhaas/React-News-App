@@ -35,8 +35,18 @@ router.route("/favorites")
 	})
 	.get(function (req, res) {
 
-		console.log("favorites GET route")
-		res.json("HEY")
+		console.log("favorites GET route");
+
+		Favorite.find({}, function (err, data) {
+			if (err) {
+				console.log(err);
+			}
+			else {
+				console.log(data);
+			}
+			res.json(data)
+		});
+
 	});
 
 module.exports = router;
