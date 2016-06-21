@@ -6946,6 +6946,9 @@ body {
   position: relative;
   top: -50%;
 }
+#navTitleReact {
+  color: #61dafb;
+}
 #logoImg {
   max-height: 50px;
   max-width: 50px;
@@ -6995,4 +6998,7 @@ i {
 }
 a {
   color: #000000;
+}
+.navbar-brand {
+  color: #fff6de;
 }

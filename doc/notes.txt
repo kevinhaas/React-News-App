@@ -5,6 +5,8 @@
 NYT SEARCH
 ----------
 * validation for imgUrl when posting to favorites in DB
+* color NYT search letter for react with #61dafb
+* hearts on the favorite page add a +1, more hearts is a higher rank on the list
 * IF article results < 0, display toastr: "no results found"
 * Save Articles/Add notes to mongo on handleClick
 * user favorite article page - this is where notes can be added

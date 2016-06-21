@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Link} from "react-router";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
-import ArticleList from "./article-list";
+import {LinkContainer} from "react-router-bootstrap";
 
 class NavBar extends React.Component {
 	constructor(props) {
@@ -51,7 +51,7 @@ class NavBar extends React.Component {
 						<Link to="/">
 							<strong id="navTitle">NYT Search
 							<br />
-							<small>powered by React</small>
+							<small>powered by <strong id="navTitleReact">React</strong></small>
 							</strong>
 						</Link>
 
@@ -62,13 +62,18 @@ class NavBar extends React.Component {
 				</Navbar.Header>
 
 				<Navbar.Collapse>
+
 					<Nav pullRight>
 
-						<NavItem eventKey={1} onClick={this.handleClick.bind(this)}><Link to="/">Latest</Link></NavItem>
+                        <LinkContainer to="/">
+                            <NavItem id="test" eventKey={1} onClick={this.handleClick.bind(this)}>Latest</NavItem>
+                        </LinkContainer>
 
-						<NavItem eventKey={1}><Link to="/favorite">Favorites</Link></NavItem>
-
-						<NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
+                        <LinkContainer to="/favorite">
+                            <NavItem eventKey={1}>Favorites</NavItem>
+                        </LinkContainer>
+                        
+                        <NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Tech</MenuItem>
 							<MenuItem eventKey={3.2}>Music</MenuItem>
 							<MenuItem eventKey={3.3}>Food</MenuItem>
