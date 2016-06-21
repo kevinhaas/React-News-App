@@ -11,8 +11,7 @@ class FavoriteList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			articleRes: [],
-			searchQuery: [],
+			favArticleRes: [],
 			copied: false,
 			headline: "",
 			snippet: "",
@@ -32,77 +31,25 @@ class FavoriteList extends React.Component {
 
 	onChange() {
 	}
-	
-	handleClick(head) {
-		console.log("heart'd!");
 
-		console.log(head.headline.main, head.snippet, head.web_url);
-
-		axios.post("/favorites", {
-			headline: head.headline.main,
-			snippet: head.snippet,
-			url: head.web_url
-		})
-			.then(function (res) {
-				console.log(res);
-			})
-			.catch(function (err) {
-				console.log(err);
-			})
+	handleClick() {
 
 	}
 
 	handleSubmit(event) {
-		event.preventDefault();
-		console.log(this.state.searchQuery);
-		this.getSearchArticles();
-	}
 
-	// grabs latest articles on page load //
-	getLatestArticles() {
-
-		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-		url += "?" + $.param({
-				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
-			});
-
-		axios.get(url)
-			.then((res) => {
-				console.log(res.data.response.docs);
-
-				this.setState({
-					articleRes: res.data.response.docs,
-					searchQuery: ""
-				});
-			})
-			.catch(function (error) {
-				if (error.response) {
-					console.error(error.response.data);
-					console.error(error.response.status);
-					console.error(error.response.headers);
-				} else {
-					console.error("Error", error.message);
-				}
-			});
 	}
 
 	// fetches articles for the desired query //
 	// TODO: if articleRes === 0 then display no results message and prompt to search again //
-	getSearchArticles() {
+	getFavoriteArticles() {
 
-		var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-		url += "?" + $.param({
-				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
-				"q"      : this.state.searchQuery
-			});
-
-		axios.get(url)
-			.then((res) => {
-				console.log(res.data.response.docs);
+		axios.get("/favorites")
+			.then((favs) => {
+				console.log(favs);
 
 				this.setState({
-					articleRes: res.data.response.docs,
-					searchQuery: ""
+					favArticleRes: favs.data
 				});
 			})
 			.catch(function (error) {
@@ -120,7 +67,7 @@ class FavoriteList extends React.Component {
 
 		console.log(this.state);
 
-		let articleRender = this.state.articleRes.map((head, index) => {
+		let favArticleRender = this.state.favArticleRes.map((head, index) => {
 
 			// if (head.multimedia.length === 0) {
 			// 	console.log(this);
@@ -137,24 +84,15 @@ class FavoriteList extends React.Component {
 
 							<div className="media">
 
-								{head.multimedia.length === 0 ?
-
 									<a className="media-left">
 										<img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
 									</a>
-
-									:
-
-									<a className="media-left">
-										<img className="resImg" src={"https://nytimes.com/" + head.multimedia[0].url} />
-									</a>
-								}
 
 								<div className="media-body">
 
 									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}></i>
 
-									<CopyToClipboard text={head.web_url}
+									<CopyToClipboard text={head.url}
 									                 onCopy={() => this.setState({copied: true})}>
 										<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
@@ -191,7 +129,7 @@ class FavoriteList extends React.Component {
 					</div>
 
 					<div className="row">
-						{articleRender}
+						{favArticleRender}
 					</div>
 
 				</div>
@@ -200,4 +138,4 @@ class FavoriteList extends React.Component {
 	};
 }
 
-export default articleList;
+export default FavoriteList;
