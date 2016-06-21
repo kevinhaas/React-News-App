@@ -4,7 +4,7 @@
 
 NYT SEARCH
 ----------
-* article title is a url link to the article
+* validation for imgUrl when posting to favorites in DB
 * IF article results < 0, display toastr: "no results found"
 * Save Articles/Add notes to mongo on handleClick
 * user favorite article page - this is where notes can be added

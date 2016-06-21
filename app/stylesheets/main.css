@@ -6981,8 +6981,14 @@ input {
   background-color: #0b0b0b;
   font-family: 'Source Sans Pro', sans-serif;
 }
+i {
+  cursor: pointer;
+}
 .fa-heart {
   position: relative;
   margin: 0 1% 1% 0;
   color: #ff0000;
+}
+a {
+  color: #000000;
 }

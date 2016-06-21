@@ -4,6 +4,7 @@
 
 import React from "react";
 import axios from "axios";
+import CopyToClipboard from "react-copy-to-clipboard";
 import {Link} from "react-router";
 
 class articleList extends React.Component {
@@ -11,7 +12,12 @@ class articleList extends React.Component {
 		super(props);
 		this.state = {
 			articleRes: [],
-			searchQuery: []
+			searchQuery: [],
+			copied: false,
+			headline: "",
+			snippet: "",
+			url: "",
+			imgUrl: ""
 		}
 	}
 
@@ -29,8 +35,23 @@ class articleList extends React.Component {
 	}
 
 	// just for testing right now //
-	handleClick() {
-		console.log(this.props);
+	handleClick(head) {
+		console.log("heart'd!");
+
+		console.log(head.headline.main, head.snippet, head.web_url);
+
+		axios.post("/favorites", {
+			headline: head.headline.main,
+			snippet: head.snippet,
+			url: head.web_url
+		})
+		.then(function (res) {
+			console.log(res);
+		})
+		.catch(function (err) {
+			console.log(err);
+		})
+
 	}
 
 	handleSubmit(event) {
@@ -103,6 +124,13 @@ class articleList extends React.Component {
 
 		let articleRender = this.state.articleRes.map((head, index) => {
 
+			// if (head.multimedia.length === 0) {
+			// 	console.log(this);
+			// 	console.log(head.multimedia[0].url);
+			// 	head.multimedia[0].url = "boop";
+			// 	console.log(head.multimedia[0].url);
+			// }
+
 			return (
 				<div key={head._id} id="searchBody">
 
@@ -126,9 +154,14 @@ class articleList extends React.Component {
 
 								<div className="media-body">
 
-									<i className="fa fa-heart" aria-hidden="true"></i>
+									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}></i>
+
+									<CopyToClipboard text={head.web_url}
+										onCopy={() => this.setState({copied: true})}>
 									<i className="fa fa-share-alt" aria-hidden="true"></i>
-									<h4 className="media-heading">{head.headline.main}</h4>
+									</CopyToClipboard>
+
+									<a href={head.web_url} target="#blank"><h4 className="media-heading">{head.headline.main}</h4></a>
 									<small>{head.snippet}</small>
 
 								</div>
@@ -148,7 +181,7 @@ class articleList extends React.Component {
 
 					<div className="text-center">
 
-						<img onClick={this.handleClick.bind(this)} id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
+						<img id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
 
 						<form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
 							<div className="form-group">
