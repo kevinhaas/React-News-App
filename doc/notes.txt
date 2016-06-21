@@ -13,3 +13,4 @@ NYT SEARCH
 * socket.io display user count
 * recent search list - mongo field that is an array with recent user searches pushes into it, maybe past 10?
 * pagination
+* close navbar when it's on hamburger onClick

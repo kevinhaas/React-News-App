@@ -31,7 +31,7 @@ class NavBar extends React.Component {
 	}
 
 	handleClick() {
-		
+
 	}
 
 	handleSubmit(event) {
@@ -62,11 +62,12 @@ class NavBar extends React.Component {
 				</Navbar.Header>
 
 				<Navbar.Collapse>
-
 					<Nav pullRight>
 
-						<NavItem eventKey={1} onClick={this.handleClick.bind(this)}>Latest</NavItem>
-						<NavItem eventKey={1} href="#">Favorites</NavItem>
+						<NavItem eventKey={1} onClick={this.handleClick.bind(this)}><Link to="/">Latest</Link></NavItem>
+
+						<NavItem eventKey={1}><Link to="/favorite">Favorites</Link></NavItem>
+
 						<NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Tech</MenuItem>
 							<MenuItem eventKey={3.2}>Music</MenuItem>

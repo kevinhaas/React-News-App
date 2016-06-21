@@ -119,12 +119,9 @@ class FavoriteList extends React.Component {
 
 						<img id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
 
-						<form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
-							<div className="form-group">
-								<input ref="refTest" type="text" className="form-control" placeholder="Search the NYT" value={this.state.searchQuery} onChange={this.onChange.bind(this)} />
-							</div>
-							<button type="submit" className="btn btn-default" id="searchBtn">Search</button>
-						</form>
+						<br />
+
+						<button type="button" className="btn btn-default" id="backToSearchBtn">Search</button>
 
 					</div>
 
