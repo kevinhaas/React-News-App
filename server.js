@@ -7,6 +7,7 @@ const express        = require("express"),
 	  app            = express(),
 	  http           = require("http"),
 	  bodyParser     = require("body-parser"),
+	  favicon        = require("serve-favicon"),
 	  logger         = require("./cfgs/logger"),
 	  expressWinston = require("express-winston"),
 	  mongoose       = require("mongoose"),
@@ -63,6 +64,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
+app.use(favicon(__dirname + "/public/favicon.ico"));
 
 // ROUTES //
 app.use("/", require("./app/routes/api-routes"));
