@@ -8,7 +8,7 @@ const express = require("express"),
 	  Favorite = require("../models/favorites-model");
 
 router.route("/favorites")
-	.post(function (req, res) {
+	.post(function (req, res, next) {
 
 		var headline = req.body.headline;
 		var snippet  = req.body.snippet;
@@ -23,13 +23,23 @@ router.route("/favorites")
 			snippet: snippet,
 			url: url,
 			imgUrl: imgUrl,
-            hearts: 0,
+            hearts: 1,
             userIps: req.headers['x-forwarded-for'] || req.connection.remoteAddress
 		});
 
 		favArticle.save(function (err) {
 			if (err) {
+
 				console.log(err);
+                Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
+                    if (err) {
+                        console.error(err);
+                    }
+                    else {
+                        console.log(data);
+                    }
+                })
+
 			}
 			else {
 				console.log("article saved to mongo");
