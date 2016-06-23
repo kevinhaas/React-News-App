@@ -32,7 +32,13 @@ class FavoriteList extends React.Component {
 	onChange() {
 	}
 
-	handleClick() {
+	handleClick(head) {
+		console.log("heart +1 click working");
+
+        axios.put("/favorites", {
+            headline: head.headline,
+            hearts: head.hearts
+        })
 
 	}
 

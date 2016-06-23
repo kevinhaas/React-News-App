@@ -38,6 +38,7 @@ class ArticleList extends React.Component {
 	handleClick(head) {
 		console.log("heart'd!");
 		console.log(head.headline.main, head.snippet, head.web_url);
+        console.log(this.state);
 
 		axios.post("/favorites", {
 			headline: head.headline.main,
@@ -85,6 +86,18 @@ class ArticleList extends React.Component {
 					articleRes: res.data.response.docs,
 					searchQuery: ""
 				});
+
+                axios.get("/favorites")
+                    .then((res) => {
+                        console.log(res);
+                        console.log(res.data[0].headline);
+
+                        this.setState({
+                            headline: res.data[0].headline,
+                            hearts: res.data[0].hearts
+                        })
+                    })
+
 			})
 			.catch(function (error) {
 				if (error.response) {
@@ -163,7 +176,15 @@ class ArticleList extends React.Component {
 
 								<div className="media-body">
 
-									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>1</i>
+                                    {head.headline.main === this.state.headline ?
+
+                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>1</i>
+
+                                        :
+
+                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>2</i>
+
+                                    }
 
 									<CopyToClipboard text={head.web_url} onCopy={this.copyUrlClick.bind(this)}>
 									<i className="fa fa-share-alt" aria-hidden="true"></i>

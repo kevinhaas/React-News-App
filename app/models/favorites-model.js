@@ -10,8 +10,8 @@ const Favorites = new mongoose.Schema({
 	snippet: String,
 	url: String,
 	imgUrl: String,
-	hearts: {type: Number, default: 0}
-
+	hearts: {type: Number, default: 0},
+    userIps: [{type: String}]
 });
 
 module.exports = mongoose.model("Favorites", Favorites);

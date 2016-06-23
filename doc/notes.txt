@@ -4,6 +4,8 @@
 
 NYT SEARCH
 ----------
+* update heart count display without refreshing
+* if favorite already exist, route adds one to that existing fav - pass head into PUT func arg
 * validation for imgUrl when posting to favorites in DB
 * color NYT search letter for react with #61dafb
 * hearts on the favorite page add a +1, more hearts is a higher rank on the list

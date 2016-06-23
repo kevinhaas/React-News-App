@@ -23,7 +23,8 @@ router.route("/favorites")
 			snippet: snippet,
 			url: url,
 			imgUrl: imgUrl,
-            hearts: 0
+            hearts: 0,
+            userIps: req.headers['x-forwarded-for'] || req.connection.remoteAddress
 		});
 
 		favArticle.save(function (err) {
@@ -49,7 +50,24 @@ router.route("/favorites")
 			}
 			res.json(data)
 		});
+	})
+    .put(function (req, res) {
+        console.log("PUT route working");
+        console.log(req.body.headline);
+        console.log(req.body.hearts);
 
-	});
+        var headline = req.body.headline;
+
+        Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
+            if (err) {
+                console.error(err);
+            }
+            else {
+                console.log(data);
+            }
+        })
+
+
+    });
 
 module.exports = router;
