@@ -48,6 +48,12 @@ class ArticleList extends React.Component {
 		})
 		.then(function (res) {
 			console.log(res);
+
+            axios.put("/favorites", {
+                headline: head.headline,
+                hearts: head.hearts
+            });
+
 		})
 		.catch(function (err) {
 			console.log(err);
@@ -78,7 +84,7 @@ class ArticleList extends React.Component {
 				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
 			});
 
-		axios.get(url)
+		axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fe6f6fe9125b4c14b9ab13721eaf350e")
 			.then((res) => {
 				console.log(res.data.response.docs);
 
@@ -87,6 +93,7 @@ class ArticleList extends React.Component {
 					searchQuery: ""
 				});
 
+                // get hearts count for current search results //
                 axios.get("/favorites")
                     .then((res) => {
                         console.log(res);
@@ -119,6 +126,11 @@ class ArticleList extends React.Component {
 				"api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
 				"q"      : this.state.searchQuery
 			});
+
+        // IF no query is defined, set URL to getLatestArticle() URL //
+        if (this.state.searchQuery == "") {
+            url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fe6f6fe9125b4c14b9ab13721eaf350e"
+        }
 
 		axios.get(url)
 			.then((res) => {
@@ -178,7 +190,7 @@ class ArticleList extends React.Component {
 
                                     {head.headline.main === this.state.headline ?
 
-                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>1</i>
+                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>{this.state.hearts}</i>
 
                                         :
 

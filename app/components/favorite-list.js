@@ -38,7 +38,7 @@ class FavoriteList extends React.Component {
         axios.put("/favorites", {
             headline: head.headline,
             hearts: head.hearts
-        })
+        });
 
 	}
 
