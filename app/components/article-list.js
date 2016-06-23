@@ -17,7 +17,8 @@ class ArticleList extends React.Component {
 			headline: "",
 			snippet: "",
 			url: "",
-			imgUrl: ""
+			imgUrl: "",
+            hearts: ""
 		}
 	}
 
@@ -36,13 +37,13 @@ class ArticleList extends React.Component {
 	
 	handleClick(head) {
 		console.log("heart'd!");
-
 		console.log(head.headline.main, head.snippet, head.web_url);
 
 		axios.post("/favorites", {
 			headline: head.headline.main,
 			snippet: head.snippet,
-			url: head.web_url
+			url: head.web_url,
+            imgUrl: "woop"
 		})
 		.then(function (res) {
 			console.log(res);
@@ -52,6 +53,15 @@ class ArticleList extends React.Component {
 		})
 
 	}
+
+    copyUrlClick() {
+        console.log("URL copies to clipboard");
+        toastr.success("URL copied to clipboard");
+
+        this.setState({
+            copied: true
+        });
+    }
 
 	handleSubmit(event) {
 		event.preventDefault();
@@ -153,10 +163,9 @@ class ArticleList extends React.Component {
 
 								<div className="media-body">
 
-									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}></i>
+									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>1</i>
 
-									<CopyToClipboard text={head.web_url}
-										onCopy={() => this.setState({copied: true})}>
+									<CopyToClipboard text={head.web_url} onCopy={this.copyUrlClick.bind(this)}>
 									<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
 

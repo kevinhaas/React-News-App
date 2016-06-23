@@ -13,14 +13,17 @@ router.route("/favorites")
 		var headline = req.body.headline;
 		var snippet  = req.body.snippet;
 		var url      = req.body.url;
-		// var imgUrl   = req.body.imgUrl;
-		
+		var imgUrl   = req.body.imgUrl;
+		// var hearts   = req.body.hearts;
+
 		console.log(headline, snippet, url);
 
 		var favArticle = new Favorite({
 			headline: headline,
 			snippet: snippet,
-			url: url
+			url: url,
+			imgUrl: imgUrl,
+            hearts: 0
 		});
 
 		favArticle.save(function (err) {

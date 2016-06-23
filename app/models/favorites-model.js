@@ -9,7 +9,8 @@ const Favorites = new mongoose.Schema({
 	headline: {type: String, unique: true},
 	snippet: String,
 	url: String,
-	imgUrl: String
+	imgUrl: String,
+	hearts: {type: Number, default: 0}
 
 });
 

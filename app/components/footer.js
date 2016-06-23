@@ -23,15 +23,32 @@ class Footer extends React.Component {
 		this.setState(state);
 	}
 
+	//onClick={this.handleClick}
 	handleClick() {
 		console.log("click test");
 	}
 
 	render() {
 		return(
-			<div onClick={this.handleClick} className="test">
-				this is the f00ter
-			</div>
+
+            <footer>
+                <div className="container">
+                    <div className="row">
+
+                        <div>
+
+                            <div className="col-sm-5">
+                                <p>Powered by <span id="nodeFooter"><strong>Node.js</strong></span>, <span id="mongoFooter"><strong>MongoDB</strong></span> and <span id="reactFooter"><strong>React</strong></span></p>
+
+                                <p>© 2016 Kevin Haas</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </footer>
+
 		)
 	}
 }

@@ -2,8 +2,15 @@
 @import "../../bower_components/toastr/toastr";
 
 // CUSTOM CSS //
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  padding-top: 72px;
+  margin-bottom: 100px;
 }
 
 .test {
@@ -88,6 +95,40 @@ a {
   color: #000000;
 }
 
-.navbar-brand {
-  color: #fff6de;
+.navLink {
+  color: #FFFFFF;
+  margin: 0 16px 0 0;
+  padding-bottom: 20px;
+  position: relative;
+  top: 15px;
+}
+
+#latestNavLink {
+  padding-left: 17px;
+}
+
+.navbar-collapse {
+  height: 70px;
+}
+
+footer {
+  background-color: #222222;
+  color: #9d9d9d;
+  bottom: 0;
+  height: 55px;
+  left: 0;
+  position: fixed;
+  width: 100%;
+}
+
+#nodeFooter {
+  color: #78b063
+}
+
+#mongoFooter {
+  color: #4fa64a;
+}
+
+#reactFooter {
+  color: #61dafb;
 }

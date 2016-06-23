@@ -90,14 +90,14 @@ class FavoriteList extends React.Component {
 
 								<div className="media-body">
 
-									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}></i>
+									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>{head.hearts}</i>
 
 									<CopyToClipboard text={head.url}
 									                 onCopy={() => this.setState({copied: true})}>
 										<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
 
-									<a href={head.web_url} target="#blank"><h4 className="media-heading">{head.headline.main}</h4></a>
+									<a href={head.url} target="#blank"><h4 className="media-heading">{head.headline}</h4></a>
 									<small>{head.snippet}</small>
 
 								</div>

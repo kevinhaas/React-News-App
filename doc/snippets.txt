@@ -1,0 +1,34 @@
+/*
+ * Created by Kevo on 6/22/2016.
+ */
+
+------------------------------
+NAVBAR COMPONENT DROPDOWN MENU
+------------------------------
+<NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
+    <MenuItem eventKey={3.1}>Tech</MenuItem>
+    <MenuItem eventKey={3.2}>Music</MenuItem>
+    <MenuItem eventKey={3.3}>Food</MenuItem>
+    <MenuItem eventKey={3.3}>Sports</MenuItem>
+    <MenuItem divider />
+    <MenuItem eventKey={3.3}>Add Category</MenuItem>
+</NavDropdown>
+
+-------------------------------------------
+FOOTER STICKS TO BOTTOM OF PAGE DYNAMICALLY
+-------------------------------------------
+footer {
+  background-color: #222222;
+  color: #9d9d9d;
+  bottom: 0;
+  height: 55px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}

@@ -4,6 +4,7 @@
 
 import React from "react";
 import NavBar from "../components/navbar";
+import Footer from "../components/footer";
 import ArticleList from "../components/article-list";
 
 class App extends React.Component {
@@ -12,6 +13,7 @@ class App extends React.Component {
 			<div>
 				<NavBar history={this.props.history} />
 				{this.props.children}
+				<Footer />
 			</div>
 		);
 	}

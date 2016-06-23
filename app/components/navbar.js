@@ -31,7 +31,6 @@ class NavBar extends React.Component {
 	}
 
 	handleClick() {
-
 	}
 
 	handleSubmit(event) {
@@ -43,7 +42,7 @@ class NavBar extends React.Component {
 
 		return (
 
-			<Navbar inverse>
+			<Navbar className="navbar-fixed-top" inverse>
 
 				<Navbar.Header>
 
@@ -65,22 +64,17 @@ class NavBar extends React.Component {
 
 					<Nav pullRight>
 
-                        <LinkContainer to="/">
-                            <NavItem id="test" eventKey={1} onClick={this.handleClick.bind(this)}>Latest</NavItem>
-                        </LinkContainer>
+                        <div id="navDiv">
+                            <Link to="/">
+                                <span className="navLink" id="latestNavLink" eventKey={1} onClick={this.handleClick.bind(this)}><i>Latest</i></span>
+                            </Link>
 
-                        <LinkContainer to="/favorite">
-                            <NavItem eventKey={1}>Favorites</NavItem>
-                        </LinkContainer>
-                        
-                        <NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
-							<MenuItem eventKey={3.1}>Tech</MenuItem>
-							<MenuItem eventKey={3.2}>Music</MenuItem>
-							<MenuItem eventKey={3.3}>Food</MenuItem>
-							<MenuItem eventKey={3.3}>Sports</MenuItem>
-							<MenuItem divider />
-							<MenuItem eventKey={3.3}>Add Category</MenuItem>
-						</NavDropdown>
+                                <span className="navLink">|</span>
+
+                            <Link to="/favorite">
+                                <span className="navLink" eventKey={1}><i>Favorites</i></span>
+                            </Link>
+                        </div>
 
 					</Nav>
 
