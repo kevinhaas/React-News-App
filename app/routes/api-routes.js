@@ -2,13 +2,17 @@
  * Created by Kevo on 6/14/2016.
  */
 
-const express = require("express"),
-	  router  = express.Router(),
-	  axios   = require("axios"),
-	  Favorite = require("../models/favorites-model");
+const express  = require("express"),
+	  router   = express.Router(),
+	  axios    = require("axios"),
+	  Favorite = require("../models/favorites-model"),
+      Query    = require("../models/query-model"),
+      moment   = require("moment"),
+      now      = moment().format();
+
 
 router.route("/favorites")
-	.post(function (req, res, next) {
+	.post(function (req, res) {
 
 		var headline = req.body.headline;
 		var snippet  = req.body.snippet;
@@ -28,9 +32,11 @@ router.route("/favorites")
 		});
 
 		favArticle.save(function (err) {
-			if (err) {
 
+			if (err) {
 				console.log(err);
+
+                // IF it already exists in favorites, just add 1 to the heart count for this article //
                 Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
                     if (err) {
                         console.error(err);
@@ -42,7 +48,7 @@ router.route("/favorites")
 
 			}
 			else {
-				console.log("article saved to mongo");
+				console.log("Article Saved To Mongo @ " + now);
 			}
 		})
 
@@ -77,6 +83,31 @@ router.route("/favorites")
             }
         })
 
+
+    });
+
+router.route("/queries")
+    .post(function (req, res) {
+
+        console.log("query post working!");
+
+        console.log(req.body);
+
+        var query = req.body.searchQuery;
+
+        var userQuery = new Query({
+            userQuery: query,
+            userIp: req.headers['x-forwarded-for'] || req.connection.remoteAddress
+        });
+
+        userQuery.save(function (err) {
+            if (err) {
+                console.error(err);
+            }
+            else {
+                console.log("User Query Info Saved @ " + now);
+            }
+        })
 
     });
 

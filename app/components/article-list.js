@@ -14,11 +14,11 @@ class ArticleList extends React.Component {
 			articleRes: [],
 			searchQuery: [],
 			copied: false,
-			headline: "",
-			snippet: "",
-			url: "",
-			imgUrl: "",
-            hearts: ""
+			favRes: [],
+			snippet: [],
+			url: [],
+			imgUrl: [],
+            hearts: []
 		}
 	}
 
@@ -48,12 +48,6 @@ class ArticleList extends React.Component {
 		})
 		.then(function (res) {
 			console.log(res);
-
-            axios.put("/favorites", {
-                headline: head.headline,
-                hearts: head.hearts
-            });
-
 		})
 		.catch(function (err) {
 			console.log(err);
@@ -93,18 +87,19 @@ class ArticleList extends React.Component {
 					searchQuery: ""
 				});
 
-                // get hearts count for current search results //
-                axios.get("/favorites")
-                    .then((res) => {
-                        console.log(res);
-                        console.log(res.data[0].headline);
+            // get hearts count for current search results //
+            axios.get("/favorites")
+                .then((res) => {
+                    console.log(res);
+
+                    // for (var i = 0; i < res.data.length; i++) {
+                    //     // console.log(res.data[i].headline);
+                    //     // console.log(res.data[i].hearts);
 
                         this.setState({
-                            headline: res.data[0].headline,
-                            hearts: res.data[0].hearts
-                        })
-                    })
-
+                            favRes: res.data
+                        });
+                })
 			})
 			.catch(function (error) {
 				if (error.response) {
@@ -136,10 +131,15 @@ class ArticleList extends React.Component {
 			.then((res) => {
 				console.log(res.data.response.docs);
 
+                axios.post("/queries", {
+                    searchQuery: this.state.searchQuery
+                });
+
 				this.setState({
 					articleRes: res.data.response.docs,
 					searchQuery: ""
 				});
+
 			})
 			.catch(function (error) {
 				if (error.response) {
@@ -155,9 +155,16 @@ class ArticleList extends React.Component {
 	render() {
 
 		console.log(this.state);
+        console.log(this.state.favRes);
+
+        // for (var i = 0; i < this.state.hearts.length; i++) {
+        //     console.log(this.state.hearts[i]);
+        // }
 
 		let articleRender = this.state.articleRes.map((head, index) => {
+            let heartRender = this.state.favRes.map((data, index) => {
 
+            // let heartRender = this.state.hearts.map((doop, index) => {
 			// if (head.multimedia.length === 0) {
 			// 	console.log(this);
 			// 	console.log(head.multimedia[0].url);
@@ -166,12 +173,12 @@ class ArticleList extends React.Component {
 			// }
 
 			return (
-				<div key={head._id} id="searchBody">
+				<div id="searchBody">
 
 					<div className="panel panel-default" id="resultPanel">
 						<div className="panel-body">
 
-							<div className="media">
+							<div key={head.headline} className="media">
 
 								{head.multimedia.length === 0 ?
 
@@ -186,15 +193,15 @@ class ArticleList extends React.Component {
 									</a>
 								}
 
-								<div className="media-body">
+								<div key={data._id} className="media-body">
 
-                                    {head.headline.main === this.state.headline ?
+                                    {head.headline.main == data.headline ?
 
-                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>{this.state.hearts}</i>
+                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>{data.hearts}</i>
 
                                         :
 
-                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>2</i>
+                                        <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>No</i>
 
                                     }
 
@@ -214,6 +221,12 @@ class ArticleList extends React.Component {
 
 				</div>
 			);
+            });
+            return(
+                <div>
+                    {heartRender}
+                </div>
+            )
 		});
 
 		return (

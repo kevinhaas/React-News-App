@@ -5,7 +5,6 @@
 const mongoose = require("mongoose");
 
 const Favorites = new mongoose.Schema({
-
 	headline: {type: String, unique: true},
 	snippet: String,
 	url: String,
