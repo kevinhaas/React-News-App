@@ -7,7 +7,12 @@ NYT SEARCH
 * update heart count display without refreshing
 * imgUrl in favs
 * dynamically rendering hearts in articleList search results
+* share counter
+* sort fav page by most hearts
+* trending/category buttons on articleList component
+* italicized heartCounts?
 
+* server-side rendering footnote
 * react logo fade in/out over nyt logo on search
 
 * CHANGE TO PROMISES/ES6 WHERE POSSIBLE!!!

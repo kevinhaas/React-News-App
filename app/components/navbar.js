@@ -50,7 +50,7 @@ class NavBar extends React.Component {
 						<Link to="/">
 							<strong id="navTitle">NYT Search
 							<br />
-							<small>powered by <strong id="navTitleReact">React</strong></small>
+							<small>powered by <strong className="reactColor">React</strong></small>
 							</strong>
 						</Link>
 
@@ -69,7 +69,7 @@ class NavBar extends React.Component {
                                 <span className="navLink" id="latestNavLink" eventKey={1} onClick={this.handleClick.bind(this)}><i>Latest</i></span>
                             </Link>
 
-                                <span className="navLink">|</span>
+                                <span className="navLink reactColor">|</span>
 
                             <Link to="/favorite">
                                 <span className="navLink" eventKey={1}><i>Favorites</i></span>

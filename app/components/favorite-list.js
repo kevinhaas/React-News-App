@@ -103,7 +103,7 @@ class FavoriteList extends React.Component {
 										<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
 
-									<a href={head.url} target="#blank"><h4 className="media-heading">{head.headline}</h4></a>
+									<a href={head.url} target="#blank"><h4 className="media-heading"><strong>{head.headline}</strong></h4></a>
 									<small>{head.snippet}</small>
 
 								</div>
@@ -124,10 +124,6 @@ class FavoriteList extends React.Component {
 					<div className="text-center">
 
 						<img id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
-
-						<br />
-
-						<button type="button" className="btn btn-default" id="backToSearchBtn">Search</button>
 
 					</div>
 

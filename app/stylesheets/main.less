@@ -13,6 +13,25 @@ body {
   margin-bottom: 100px;
 }
 
+// removes blue focus border from elements //
+button:focus {
+  outline:0 !important;
+}
+
+.btn:hover {
+  color: #61dafb !important;
+}
+
+a:hover {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #61dafb !important;
+  text-decoration: none
+}
+
 .test {
   color: #00ee00;
 }
@@ -23,10 +42,11 @@ body {
 
 #navTitle {
   position: relative;
-  top: -50%
+  top: -50%;
+  color: #FFFFFF;
 }
 
-#navTitleReact {
+.reactColor{
   color: #61dafb;
 }
 
@@ -65,7 +85,7 @@ input {
 
 #searchBtn {
   margin-bottom: 15px;
-  color: #ffffff;
+  color: #f0f0f0;
   background-color: #0b0b0b;
 }
 
@@ -96,7 +116,7 @@ a {
 }
 
 .navLink {
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 16px 0 0;
   padding-bottom: 20px;
   position: relative;

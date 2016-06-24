@@ -6942,6 +6942,20 @@ body {
   padding-top: 72px;
   margin-bottom: 100px;
 }
+button:focus {
+  outline: 0 !important;
+}
+.btn:hover {
+  color: #61dafb !important;
+}
+a:hover {
+  color: #61dafb;
+  text-decoration: none;
+}
+a:visited {
+  color: #61dafb !important;
+  text-decoration: none;
+}
 .test {
   color: #00ee00;
 }
@@ -6951,8 +6965,9 @@ body {
 #navTitle {
   position: relative;
   top: -50%;
+  color: #FFFFFF;
 }
-#navTitleReact {
+.reactColor {
   color: #61dafb;
 }
 #logoImg {
@@ -6986,7 +7001,7 @@ input {
 }
 #searchBtn {
   margin-bottom: 15px;
-  color: #ffffff;
+  color: #f0f0f0;
   background-color: #0b0b0b;
 }
 #backToSearchBtn {
@@ -7006,7 +7021,7 @@ a {
   color: #000000;
 }
 .navLink {
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 16px 0 0;
   padding-bottom: 20px;
   position: relative;
