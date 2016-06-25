@@ -15,8 +15,6 @@ class ArticleList extends React.Component {
             searchQuery: [],
             copied: false,
             favRes: [],
-            snippet: [],
-            url: [],
             imgUrl: [],
             hearts: []
         }
@@ -31,14 +29,23 @@ class ArticleList extends React.Component {
         console.log("articleList component unMounted")
     }
 
-    onChange(e) {
-        this.setState({ searchQuery: e.target.value });
+    onChange(data, e) {
+        this.setState({
+            searchQuery: e.target.value
+            // hearts: data.hearts + 1
+        });
     }
 
     handleClick(head) {
         console.log("heart'd!");
         console.log(head.headline.main, head.snippet, head.web_url);
         console.log(this.state);
+
+        console.log(this.refs.heartRef);
+
+        this.setState({
+            hearts: this.state.hearts + 1
+        });
 
         axios.post("/favorites", {
             headline: head.headline.main,
@@ -92,12 +99,19 @@ class ArticleList extends React.Component {
                     .then((res) => {
                         console.log(res);
 
-                        // for (var i = 0; i < res.data.length; i++) {
-                        //     // console.log(res.data[i].headline);
-                        //     // console.log(res.data[i].hearts);
+                        var heartData = [];
+
+                        for (var i = 0; i < res.data.length; i++) {
+                            // console.log(res.data[i].headline);
+
+                            heartData.push(res.data[i].hearts)
+                        }
+
+                        console.log(heartData);
 
                         this.setState({
-                            favRes: res.data
+                            favRes: res.data,
+                            hearts: heartData
                         });
                     })
             })
@@ -199,10 +213,20 @@ class ArticleList extends React.Component {
 
                                             {this.state.favRes.map((data, heartIndex) => {
 
-
                                                 return head.headline.main === data.headline ?
 
-                                                    <span key={data._id}>{data.hearts}</span>
+                                                    <span ref="heartRef" key={data._id} onChange={this.onChange.bind(this, data.hearts)}>
+
+                                                        {this.state.hearts.map((heartStuff) => {
+
+                                                            return(
+                                                                <div>weee</div>
+                                                            )
+
+                                                        })}
+
+
+                                                    </span>
 
                                                     :
 
@@ -239,7 +263,7 @@ class ArticleList extends React.Component {
 
                         <form className="form" role="search" onSubmit={this.handleSubmit.bind(this)}>
                             <div className="form-group">
-                                <input ref="refTest" type="text" className="form-control" placeholder="Search the NYT" value={this.state.searchQuery} onChange={this.onChange.bind(this)} />
+                                <input type="text" className="form-control" placeholder="Search the NYT" value={this.state.searchQuery} onChange={this.onChange.bind(this)} />
                             </div>
                             <button type="submit" className="btn btn-default" id="searchBtn">Search</button>
                         </form>
