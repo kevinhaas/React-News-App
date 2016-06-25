@@ -90,7 +90,7 @@ class FavoriteList extends React.Component {
 
 							<div className="media">
 
-                                {head.imgUrl === 0 ?
+                                {head.imgUrl === "no pic" ?
 
                                     <a href={head.web_url} target="#blank" className="media-left">
                                         <img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
