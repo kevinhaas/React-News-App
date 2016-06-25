@@ -69,66 +69,25 @@ class ArticleList extends React.Component {
             url: head.web_url,
             imgUrl: "woop"
         })
-            .then(function (res) {
-                console.log(res);
-
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
+        .then(function (res) {
+            console.log(res);
+        })
+        .catch(function (err) {
+            console.error(err);
+        });
 
         setTimeout(() => {
             axios.get("/favorites")
-                .then((res) => {
-                    console.log(res);
+            .then((res) => {
+                console.log(res);
 
-                    var heartData = [];
+                this.setState({
+                 favRes: res.data
+                });
 
-                    for (var i = 0; i < res.data.length; i++) {
-                        // console.log(res.data[i].headline);
-
-                        heartData.push(res.data[i].hearts)
-                    }
-
-                    console.log(heartData);
-
-                    this.setState({
-                        favRes: res.data,
-                        hearts: heartData
-                    });
-                })
-        }, 1000)	;
-    }
-
-    // handleClick(head) {
-    //     console.log("heart'd!");
-    //     console.log(head.headline.main, head.snippet, head.web_url);
-    //
-    //     console.log(this.refs.heartRef);
-    //
-    //     var newState = update(this.state, {
-    //         favRes: {hearts: {$set: 1}}
-    //     });
-    //
-    //     this.setState(newState);
-    //
-    //     console.log(this.state);
-    //
-    //     axios.post("/favorites", {
-    //         headline: head.headline.main,
-    //         snippet: head.snippet,
-    //         url: head.web_url,
-    //         imgUrl: "woop"
-    //     })
-    //         .then(function (res) {
-    //             console.log(res);
-    //
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err);
-    //         });
-    //
-    // }
+            })
+        }, 1000);
+        }
 
     copyUrlClick() {
         console.log("URL copies to clipboard");

@@ -11,6 +11,20 @@ const express  = require("express"),
       now      = moment().format();
 
 
+router.route("/favorites/hearts")
+    .post(function (req,res) {
+        Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
+            if (err) {
+                console.error(err);
+                res.send("ERROR ADDING HEART")
+            }
+            else {
+                console.log(data);
+                res.send("HEART ADDED");
+            }
+        })
+    });
+
 router.route("/favorites")
 	.post(function (req, res) {
 
@@ -36,19 +50,22 @@ router.route("/favorites")
 			if (err) {
 				console.log(err);
 
-                // IF it already exists in favorites, just add 1 to the heart count for this article //
                 Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
+
                     if (err) {
                         console.error(err);
+                        res.send("ERROR ADDING HEART")
                     }
                     else {
                         console.log(data);
+                        res.send("HEART ADDED");
                     }
-                })
-
+                });
 			}
+
 			else {
 				console.log("Article Saved To Mongo @ " + now);
+                res.send("ARTICLE SAVED: " + headline);
 			}
 		})
 
@@ -83,7 +100,6 @@ router.route("/favorites")
             }
         })
 
-
     });
 
 router.route("/queries")
@@ -103,9 +119,11 @@ router.route("/queries")
         userQuery.save(function (err) {
             if (err) {
                 console.error(err);
+                res.send("ERROR ADDING QUERY: " + err)
             }
             else {
                 console.log("User Query Info Saved @ " + now);
+                res.send("QUERY ADDED: " + query)
             }
         })
 
