@@ -11,7 +11,7 @@ class FavoriteList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			favArticleRes: [],
+			favRes: [],
 			copied: false,
 			headline: "",
 			snippet: "",
@@ -35,10 +35,39 @@ class FavoriteList extends React.Component {
 	handleClick(head) {
 		console.log("heart +1 click working");
 
-        axios.put("/favorites", {
-            headline: head.headline,
-            hearts: head.hearts
-        });
+		axios.post("/favorites", {
+			headline: head.headline,
+			hearts: head.hearts
+		})
+			.then(function (res) {
+
+				console.log(res);
+
+				if (res.data == "HEART ADDED") {
+					setTimeout(function() {
+						toastr.success("<3'd: " + head.headline.main);
+					}, 300)
+				}
+				else {
+					toastr.success("Added to Favorites: " + head.headline.main);
+				}
+
+			})
+			.catch(function (err) {
+				console.error(err);
+			});
+
+		setTimeout(() => {
+			axios.get("/favorites")
+				.then((res) => {
+					console.log(res);
+
+					this.setState({
+						favRes: res.data
+					});
+
+				})
+		}, 1000);
 
 	}
 
@@ -55,7 +84,7 @@ class FavoriteList extends React.Component {
 				console.log(favs);
 
 				this.setState({
-					favArticleRes: favs.data
+					favRes: favs.data
 				});
 			})
 			.catch(function (error) {
@@ -73,7 +102,7 @@ class FavoriteList extends React.Component {
 
 		console.log(this.state);
 
-		let favArticleRender = this.state.favArticleRes.map((head, index) => {
+		let favArticleRender = this.state.favRes.map((head, index) => {
 
 			// if (head.multimedia.length === 0) {
 			// 	console.log(this);
