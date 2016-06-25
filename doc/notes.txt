@@ -15,6 +15,7 @@ NYT SEARCH
 ----------
 * FIX setState in favorite list for heart count
 * add date above article headline
+* latest as of this date above articleList results
 * add tests
 * CHANGE TO PROMISES/ES6 WHERE POSSIBLE!!!
 * clean up logs

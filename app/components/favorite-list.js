@@ -13,7 +13,7 @@ class FavoriteList extends React.Component {
 		this.state = {
 			favRes: [],
 			copied: false,
-			headline: "",
+			favline: "",
 			snippet: "",
 			url: "",
 			imgUrl: ""
@@ -32,12 +32,12 @@ class FavoriteList extends React.Component {
 	onChange() {
 	}
 
-	handleClick(head) {
+	handleClick(fav) {
 		console.log("heart +1 click working");
 
 		axios.post("/favorites", {
-			headline: head.headline,
-			hearts: head.hearts
+			favline: fav.favline,
+			hearts: fav.hearts
 		})
 			.then(function (res) {
 
@@ -45,11 +45,11 @@ class FavoriteList extends React.Component {
 
 				if (res.data == "HEART ADDED") {
 					setTimeout(function() {
-						toastr.success("<3'd: " + head.headline);
+						toastr.success("<3'd: " + fav.favline);
 					}, 300)
 				}
 				else {
-					toastr.success("Added to Favorites: " + head.headline);
+					toastr.success("Added to Favorites: " + fav.favline);
 				}
 
 			})
@@ -91,7 +91,7 @@ class FavoriteList extends React.Component {
 				if (error.response) {
 					console.error(error.response.data);
 					console.error(error.response.status);
-					console.error(error.response.headers);
+					console.error(error.response.favers);
 				} else {
 					console.error("Error", error.message);
 				}
@@ -100,49 +100,40 @@ class FavoriteList extends React.Component {
 
 	render() {
 
-		console.log(this.state);
-
-		let favArticleRender = this.state.favRes.map((head, index) => {
-
-			// if (head.multimedia.length === 0) {
-			// 	console.log(this);
-			// 	console.log(head.multimedia[0].url);
-			// 	head.multimedia[0].url = "boop";
-			// 	console.log(head.multimedia[0].url);
-			// }
+		let favArticleRender = this.state.favRes.map((fav, index) => {
 
 			return (
-				<div key={head._id} id="searchBody">
+				<div key={fav._id} id="searchBody">
 
 					<div className="panel panel-default" id="resultPanel">
 						<div className="panel-body">
 
 							<div className="media">
 
-                                {head.imgUrl === "no pic" ?
+                                {fav.imgUrl === "no pic" ?
 
-                                    <a href={head.web_url} target="#blank" className="media-left">
+                                    <a href={fav.web_url} target="#blank" className="media-left">
                                         <img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
                                     </a>
 
                                     :
 
-                                    <a href={head.web_url} target="#blank" className="media-left">
-                                        <img className="resImg" src={"https://nytimes.com/" + head.imgUrl} />
+                                    <a href={fav.web_url} target="#blank" className="media-left">
+                                        <img className="resImg" src={"https://nytimes.com/" + fav.imgUrl} />
                                     </a>
                                 }
 
 								<div className="media-body">
 
-									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>{head.hearts}</i>
+									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, fav)}>{fav.hearts}</i>
 
-									<CopyToClipboard text={head.url}
+									<CopyToClipboard text={fav.url}
 									                 onCopy={() => this.setState({copied: true})}>
 										<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
 
-									<a href={head.url} target="#blank"><h4 className="media-heading"><strong>{head.headline}</strong></h4></a>
-									<small>{head.snippet}</small>
+									<a href={fav.url} target="#blank"><h4 className="media-faving"><strong>{fav.favline}</strong></h4></a>
+									<small>{fav.snippet}</small>
 
 								</div>
 
