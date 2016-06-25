@@ -74,7 +74,9 @@ class ArticleList extends React.Component {
             console.log(res);
 
             if (res.data == "HEART ADDED") {
+                setTimeout(function() {
                 toastr.success("<3'd: " + head.headline.main);
+            }, 500)
             }
             else {
                 toastr.success("Added to Favorites: " + head.headline.main);
