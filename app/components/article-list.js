@@ -217,10 +217,12 @@ class ArticleList extends React.Component {
 
                                                     <span ref="heartRef" key={data._id} onChange={this.onChange.bind(this, data.hearts)}>
 
-                                                        {this.state.hearts.map((heartStuff) => {
+                                                        {this.state.hearts.map((heartStuff, dex) => {
+
+                                                            {console.log(heartStuff, dex)}
 
                                                             return(
-                                                                <div>weee</div>
+                                                                <span key={heartStuff._id}>{heartStuff} {dex}</span>
                                                             )
 
                                                         })}
