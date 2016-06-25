@@ -45,11 +45,11 @@ class FavoriteList extends React.Component {
 
 				if (res.data == "HEART ADDED") {
 					setTimeout(function() {
-						toastr.success("<3'd: " + head.headline.main);
+						toastr.success("<3'd: " + head.headline);
 					}, 300)
 				}
 				else {
-					toastr.success("Added to Favorites: " + head.headline.main);
+					toastr.success("Added to Favorites: " + head.headline);
 				}
 
 			})
