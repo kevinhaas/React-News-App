@@ -28,6 +28,8 @@ router.route("/favorites/hearts")
 router.route("/favorites")
 	.post(function (req, res) {
 
+        console.log(req.body.imgUrl);
+
 		var headline = req.body.headline;
 		var snippet  = req.body.snippet;
 		var url      = req.body.url;

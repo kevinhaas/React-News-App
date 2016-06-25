@@ -6976,6 +6976,9 @@ a:visited {
   border-radius: 50%;
   margin: -10px 0 10px 0;
 }
+#favListTitle {
+  margin-bottom: 45px;
+}
 .resImg {
   max-height: 100px;
   max-width: 75px;
@@ -6992,7 +6995,7 @@ a:visited {
   border-style: solid;
   border-color: #000000;
   border-radius: 50%;
-  margin: 15px 13px 10px 13px;
+  margin: 15px 12px 10px 13px;
 }
 input {
   text-align: center;
@@ -7014,8 +7017,11 @@ i {
 }
 .fa-heart {
   position: relative;
-  margin: 0 1% 1% 0;
+  margin: 0 10px 1% 0;
   color: #ff0000;
+}
+.fa-share-alt {
+  position: relative;
 }
 a {
   color: #000000;

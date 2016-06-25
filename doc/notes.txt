@@ -2,8 +2,13 @@
  * Created by Kevo on 6/14/2016.
  */
 
+FEATURES
+--------
+* Search results display amount of likes dynamically
+
 NYT SEARCH
 ----------
+* clean up logs
 * update heart count display without refreshing
 * imgUrl in favs
 * dynamically rendering hearts in articleList search results

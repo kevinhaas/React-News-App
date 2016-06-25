@@ -67,7 +67,7 @@ class ArticleList extends React.Component {
             headline: head.headline.main,
             snippet: head.snippet,
             url: head.web_url,
-            imgUrl: "woop"
+            imgUrl: head.multimedia[0].url
         })
         .then(function (res) {
             console.log(res);

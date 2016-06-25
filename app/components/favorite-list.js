@@ -90,9 +90,18 @@ class FavoriteList extends React.Component {
 
 							<div className="media">
 
-									<a className="media-left">
-										<img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
-									</a>
+                                {head.imgUrl === 0 ?
+
+                                    <a href={head.web_url} target="#blank" className="media-left">
+                                        <img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
+                                    </a>
+
+                                    :
+
+                                    <a href={head.web_url} target="#blank" className="media-left">
+                                        <img className="resImg" src={"https://nytimes.com/" + head.imgUrl} />
+                                    </a>
+                                }
 
 								<div className="media-body">
 
@@ -124,6 +133,8 @@ class FavoriteList extends React.Component {
 					<div className="text-center">
 
 						<img id="logoImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
+
+						<h2 id="favListTitle">Favorites</h2>
 
 					</div>
 
