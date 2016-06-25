@@ -63,11 +63,20 @@ class ArticleList extends React.Component {
         console.log(head.headline.main, head.snippet, head.web_url);
         console.log(this.refs.heartRef);
 
+        var imgUrl = "";
+
+        if (head.multimedia.length === 0) {
+            imgUrl = "no pic"
+        }
+        else {
+            imgUrl = head.multimedia[0].url;
+        }
+
         axios.post("/favorites", {
             headline: head.headline.main,
             snippet: head.snippet,
             url: head.web_url,
-            imgUrl: head.multimedia[0].url
+            imgUrl: imgUrl
         })
         .then(function (res) {
 
