@@ -5,33 +5,19 @@
 FEATURES
 --------
 * Search results display amount of likes dynamically
+* update heart count display without refreshing
+* server-side rendering
 
 NYT SEARCH
 ----------
+* CHANGE TO PROMISES/ES6 WHERE POSSIBLE!!!
 * clean up logs
-* update heart count display without refreshing
-* imgUrl in favs
-* dynamically rendering hearts in articleList search results
-* share counter
+* close navbar when it's on hamburger onClick
+* pagination
 * sort fav page by most hearts
 * trending/category buttons on articleList component
-* italicized heartCounts?
 
-* server-side rendering footnote
-* react logo fade in/out over nyt logo on search
-
-* CHANGE TO PROMISES/ES6 WHERE POSSIBLE!!!
-
-* if favorite already exist, route adds one to that existing fav - pass head into PUT func arg
-* validation for imgUrl when posting to favorites in DB
-* color NYT search letter for react with #61dafb
-* hearts on the favorite page add a +1, more hearts is a higher rank on the list
 * IF article results < 0, display toastr: "no results found"
-* Save Articles/Add notes to mongo on handleClick
-* user favorite article page - this is where notes can be added
 * latest articles are from today?
-* share button copies article url to clipboard
 * socket.io display user count
 * recent search list - mongo field that is an array with recent user searches pushes into it, maybe past 10?
-* pagination
-* close navbar when it's on hamburger onClick
