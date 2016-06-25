@@ -29,23 +29,39 @@ class ArticleList extends React.Component {
         console.log("articleList component unMounted")
     }
 
-    onChange(data, e) {
+    onChange(e) {
         this.setState({
             searchQuery: e.target.value
-            // hearts: data.hearts + 1
         });
     }
 
-    handleClick(head) {
+    // addHeartClick() {
+    //     axios.get("/favorites")
+    //         .then((res) => {
+    //             console.log(res);
+    //
+    //             var heartData = [];
+    //
+    //             for (var i = 0; i < res.data.length; i++) {
+    //                 // console.log(res.data[i].headline);
+    //
+    //                 heartData.push(res.data[i].hearts)
+    //             }
+    //
+    //             console.log(heartData);
+    //
+    //             this.setState({
+    //                 favRes: res.data,
+    //                 hearts: heartData
+    //             });
+    //         })
+    // }
+
+    addNewFavorite(head) {
+
         console.log("heart'd!");
         console.log(head.headline.main, head.snippet, head.web_url);
-        console.log(this.state);
-
         console.log(this.refs.heartRef);
-
-        this.setState({
-            hearts: this.state.hearts + 1
-        });
 
         axios.post("/favorites", {
             headline: head.headline.main,
@@ -55,12 +71,64 @@ class ArticleList extends React.Component {
         })
             .then(function (res) {
                 console.log(res);
+
             })
             .catch(function (err) {
                 console.log(err);
-            })
+            });
 
+        setTimeout(() => {
+            axios.get("/favorites")
+                .then((res) => {
+                    console.log(res);
+
+                    var heartData = [];
+
+                    for (var i = 0; i < res.data.length; i++) {
+                        // console.log(res.data[i].headline);
+
+                        heartData.push(res.data[i].hearts)
+                    }
+
+                    console.log(heartData);
+
+                    this.setState({
+                        favRes: res.data,
+                        hearts: heartData
+                    });
+                })
+        }, 1000)	;
     }
+
+    // handleClick(head) {
+    //     console.log("heart'd!");
+    //     console.log(head.headline.main, head.snippet, head.web_url);
+    //
+    //     console.log(this.refs.heartRef);
+    //
+    //     var newState = update(this.state, {
+    //         favRes: {hearts: {$set: 1}}
+    //     });
+    //
+    //     this.setState(newState);
+    //
+    //     console.log(this.state);
+    //
+    //     axios.post("/favorites", {
+    //         headline: head.headline.main,
+    //         snippet: head.snippet,
+    //         url: head.web_url,
+    //         imgUrl: "woop"
+    //     })
+    //         .then(function (res) {
+    //             console.log(res);
+    //
+    //         })
+    //         .catch(function (err) {
+    //             console.log(err);
+    //         });
+    //
+    // }
 
     copyUrlClick() {
         console.log("URL copies to clipboard");
@@ -170,21 +238,13 @@ class ArticleList extends React.Component {
 
         console.log(this.state);
         console.log(this.state.favRes);
+        console.log(this.props);
 
         // for (var i = 0; i < this.state.hearts.length; i++) {
         //     console.log(this.state.hearts[i]);
         // }
 
         let articleRender = this.state.articleRes.map((head, articleIndex) => {
-            // let heartRender = this.state.favRes.map((data, heartIndex) => {
-
-                // let heartRender = this.state.hearts.map((doop, index) => {
-                // if (head.multimedia.length === 0) {
-                // 	console.log(this);
-                // 	console.log(head.multimedia[0].url);
-                // 	head.multimedia[0].url = "boop";
-                // 	console.log(head.multimedia[0].url);
-                // }
 
                 return (
                     <div id="searchBody">
@@ -209,26 +269,13 @@ class ArticleList extends React.Component {
 
                                    <div className="media-body">
 
-                                       <i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, head)}>
+                                       <i className="fa fa-heart" aria-hidden="true" onClick={this.addNewFavorite.bind(this, head)}>
 
                                             {this.state.favRes.map((data, heartIndex) => {
 
                                                 return head.headline.main === data.headline ?
 
-                                                    <span ref="heartRef" key={data._id} onChange={this.onChange.bind(this, data.hearts)}>
-
-                                                        {this.state.hearts.map((heartStuff, dex) => {
-
-                                                            {console.log(heartStuff, dex)}
-
-                                                            return(
-                                                                <span key={heartStuff._id}>{heartStuff} {dex}</span>
-                                                            )
-
-                                                        })}
-
-
-                                                    </span>
+                                                    <span ref="heartRef" key={data._id} id={heartIndex}>{data.hearts}</span>
 
                                                     :
 
