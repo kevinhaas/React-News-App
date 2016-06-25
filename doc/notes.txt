@@ -7,6 +7,9 @@ FEATURES
 * Search results display amount of likes dynamically
 * update heart count display without refreshing
 * server-side rendering
+* toastr messages
+* winston logging
+* pm2
 
 NYT SEARCH
 ----------
@@ -14,8 +17,10 @@ NYT SEARCH
 * clean up logs
 * close navbar when it's on hamburger onClick
 * pagination
+* session management - local storage?
 * sort fav page by most hearts
 * trending/category buttons on articleList component
+* sometimes duplicate articles appear, such as a recipe linked to an article. make it so the dupes don't display, or have a separate heart count
 
 * IF article results < 0, display toastr: "no results found"
 * latest articles are from today?

@@ -70,7 +70,16 @@ class ArticleList extends React.Component {
             imgUrl: head.multimedia[0].url
         })
         .then(function (res) {
+
             console.log(res);
+
+            if (res.data == "HEART ADDED") {
+                toastr.success("<3'd: " + head.headline.main);
+            }
+            else {
+                toastr.success("Added to Favorites: " + head.headline.main);
+            }
+
         })
         .catch(function (err) {
             console.error(err);
@@ -232,7 +241,7 @@ class ArticleList extends React.Component {
 
                                             {this.state.favRes.map((data, heartIndex) => {
 
-                                                return head.headline.main === data.headline ?
+                                                return head.snippet == data.snippet ?
 
                                                     <span ref="heartRef" key={data._id} id={heartIndex}>{data.hearts}</span>
 
