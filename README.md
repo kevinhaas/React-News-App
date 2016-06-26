@@ -1,20 +1,29 @@
 # React-News-App
-## News article search utilizing the New York Times API and:
 
-Node.js<br/>
-Express<br/>
-React<br/>
-MongoDB
+### Search for articles in the NYT archives from Sept 18, 1851 to today
 
-Gulp<br/>
-Less.js<br />
-Browserify<br/>
-Winston
+#### Features:
+* Search for articles on a wide variety of topics
+* <3 an article to add it to the Favorites
+* Search results display the <3 count if article is in Favorites
+* Share articles with a convenient copy URL button
+* Mobile responsive with the mobile UX reamining a key factor throughout
 
-## Server
-Ubuntu 14.04<br/>
-Nginx<br/>
-PM2<br/>
-NVM
+#### Utilizes:
+* Node.js
+* Express
+* React
+* MongoDB
+
+* Gulp
+* Less.js
+* Browserify
+* Winston
+
+#### Server-side:
+* Ubuntu 14.04
+* Nginx
+* PM2
+* NVM
 
 ![](https://raw.githubusercontent.com/kevinhaas/React-News-App/master/doc/nyt-react-mongo-pm2-linux.png)
