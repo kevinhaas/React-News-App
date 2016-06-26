@@ -13,8 +13,8 @@
 * Node.js
 * Express
 * React
-* MongoDB
 
+* MongoDB
 * Gulp
 * Less.js
 * Browserify
