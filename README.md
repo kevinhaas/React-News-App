@@ -13,7 +13,7 @@
 * Node.js
 * Express
 * React
-* MongoDB<br />
+* MongoDB
 <br />
 * Gulp
 * Less.js
