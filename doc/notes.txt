@@ -13,10 +13,10 @@ FEATURES
 
 NYT SEARCH
 ----------
-* FIX setState in favorite list for heart count
+* FLUX FLUX FLUX FLUX FLUX
 * add date above article headline
-* latest as of this date above articleList results
-* add tests
+* more search params - # of articles, years, etc
+* "Latest as of this date" above articleList results IF initial load
 * CHANGE TO PROMISES/ES6 WHERE POSSIBLE!!!
 * clean up logs
 * close navbar when it's on hamburger onClick

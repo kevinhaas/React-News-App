@@ -8,6 +8,8 @@
 * Search results display the <3 count if article is in Favorites
 * Share articles with a convenient copy URL button
 * Mobile responsive with the mobile UX reamining a key factor throughout
+* Server-side rendering of React with Swig templating resulting in faster initial page loads and a search-engine-friendly React site
+* Logging with Winston
 
 #### Utilizes:
 * Node.js
@@ -19,6 +21,7 @@
 * Less.js
 * Browserify
 * Winston
+* Swig
 
 #### Server-side:
 * Ubuntu 14.04
