@@ -17,4 +17,4 @@ Nginx<br/>
 PM2<br/>
 NVM
 
-![alt text]()
+![](https://raw.githubusercontent.com/kevinhaas/React-News-App/master/doc/nyt-react-mongo-pm2-linux.png)
