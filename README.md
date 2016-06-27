@@ -29,4 +29,4 @@
 * PM2
 * NVM
 
-![](https://raw.githubusercontent.com/kevinhaas/React-News-App/master/doc/nyt-react-mongo-pm2-linux.png)
+![](https://raw.githubusercontent.com/kevinhaas/React-News-App/master/doc/nyt-react-mongo-pm2-linux-demo.png)
