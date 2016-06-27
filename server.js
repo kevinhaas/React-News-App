@@ -69,6 +69,14 @@ app.use(favicon(__dirname + "/public/favicon.ico"));
 app.use("/", require("./app/routes/api-routes"));
 app.use("/", require("./app/routes/html-routes"));
 
+// PM2 SIGINT interceptor to allow gracefulExit, closing of connections and saving of data //
+process.on("SIGINT", function() {
+	logger.info("Mongoose gracefulExit...");
+	db.disconnect( function (){
+		process.exit();
+	})
+});
+
 // event listener for HTTP server "error" event
 function onError(error) {
 	if (error.syscall !== "listen") {
