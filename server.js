@@ -8,25 +8,24 @@ const express        = require("express"),
 	  http           = require("http"),
 	  bodyParser     = require("body-parser"),
 	  favicon        = require("serve-favicon"),
-	  logger         = require("./cfgs/logger"),
 	  expressWinston = require("express-winston"),
 	  mongoose       = require("mongoose"),
-	  cfg            = require("./cfgs/kevcfg");
-
-const moment = require("moment"),
-	  now    = moment().format();
+	  moment         = require("moment"),
+	  now            = moment().format(),
+	  cfg            = require("./cfgs/kevcfg"),
+	  logger         = require("./cfgs/logger");
 
 // MONGO CONNECTION //
 mongoose.connect(cfg.mongoUrl, cfg.dbCfg);
 const db = mongoose.connection;
 
-db.on("error", function(err) {
+db.on("error", ((err) => {
 	logger.info("MongoDB Error:", err)
-});
+}));
 
-db.once("open", function() {
+db.once("open", (() => {
 	logger.info("MongoDB connection successful!")
-});
+}));
 
 // SERVER INITIALIZATION //
 const PORT = process.env.port || 5000,
@@ -37,19 +36,6 @@ server.listen(PORT);
 server.on("error", onError);
 logger.info("Server listening on " + PORT + " @ " + now);
 
-// SOCKET.IO //
-var onlineUsers = 0;
-io.sockets.on("connection", function(socket) {
-	onlineUsers++;
-
-	io.sockets.emit("onlineUsers", { onlineUsers: onlineUsers });
-
-	socket.on("disconnect", function () {
-		onlineUsers--;
-		io.sockets.emit("onlineUsers", { onlineUsers: onlineUsers });
-	});
-});
-
 // EXPRESS MIDDLEWARE //
 app.use(expressWinston.logger({
 	winstonInstance: logger, // declare logger instance to be used with middleware
@@ -57,7 +43,7 @@ app.use(expressWinston.logger({
 	msg: "HTTP {{req.statusCode}} {{req.method}} {{req.url}} {{req.responseTime}}ms",
 	expressFormat: true, // use default express/morgan format
 	colorStatus: true,
-	ignoreRoute: function (req, res) { return false; } // skips messages based on req/res
+	ignoreRoute: ((req, res) => { return false; }) // skips messages based on req/res
 }));
 
 app.use(bodyParser.json());
@@ -69,13 +55,13 @@ app.use(favicon(__dirname + "/public/favicon.ico"));
 app.use("/", require("./app/routes/api-routes"));
 app.use("/", require("./app/routes/html-routes"));
 
-// PM2 SIGINT interceptor to allow gracefulExit, closing of connections and saving of data //
-process.on("SIGINT", function() {
+// gracefulExits //
+process.on("SIGINT", (() => {
 	logger.info("Mongoose gracefulExit...");
-	db.disconnect( function (){
+	db.disconnect(() => {
 		process.exit();
-	})
-});
+	});
+}));
 
 // event listener for HTTP server "error" event
 function onError(error) {
@@ -83,7 +69,7 @@ function onError(error) {
 		throw error;
 	}
 
-	var bind = typeof PORT === "string"
+	let bind = typeof PORT === "string"
 		? "Pipe " + PORT
 		: "Port " + PORT;
 

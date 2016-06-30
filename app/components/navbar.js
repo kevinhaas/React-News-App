@@ -3,37 +3,19 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
 import {Link} from "react-router";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
 
 class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			articleRes: [],
-			searchQuery: [],
-			propTest: "propTest"
+			articleRes: []
 		}
 	}
 
 	componentDidMount() {
 		console.log("navbar component mounted!");
-	}
-
-	componentWillUnmount() {
-		console.log("navbar component unMounted")
-	}
-
-	onChange() {
-
-	}
-
-	handleClick() {
-	}
-
-	handleSubmit(event) {
 	}
 
 	render() {
@@ -66,7 +48,7 @@ class NavBar extends React.Component {
 
                         <div id="navDiv">
                             <Link to="/">
-                                <span className="navLink" id="latestNavLink" eventKey={1} onClick={this.handleClick.bind(this)}><i>Latest</i></span>
+                                <span className="navLink" id="latestNavLink" eventKey={1}><i>Latest</i></span>
                             </Link>
 
                                 <span className="navLink reactColor">|</span>

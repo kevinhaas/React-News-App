@@ -15,20 +15,12 @@ class Footer extends React.Component {
 		console.log("footer component mounted!");
 	}
 
-	componentWillUnmount() {
-		console.log("footer component unMounted")
-	}
-
 	onChange(state) {
 		this.setState(state);
 	}
 
-	//onClick={this.handleClick}
-	handleClick() {
-		console.log("click test");
-	}
-
 	render() {
+        
 		return(
 
             <footer>

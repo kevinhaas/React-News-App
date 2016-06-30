@@ -5,40 +5,24 @@
 const express  = require("express"),
 	  router   = express.Router(),
 	  axios    = require("axios"),
-	  Favorite = require("../models/favorites-model"),
-      Query    = require("../models/query-model"),
       moment   = require("moment"),
-      now      = moment().format();
-
-
-router.route("/favorites/hearts")
-    .post(function (req,res) {
-        Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
-            if (err) {
-                console.error(err);
-                res.send("ERROR ADDING HEART")
-            }
-            else {
-                console.log(data);
-                res.send("HEART ADDED");
-            }
-        })
-    });
+      now      = moment().format(),
+      logger   = require("../../cfgs/logger"),
+      Favorite = require("../models/favorites-model"),
+      Query    = require("../models/query-model");
 
 router.route("/favorites")
-	.post(function (req, res) {
+	.post((req, res) => {
+        logger.info(req.body.imgUrl);
 
-        console.log(req.body.imgUrl);
+		let headline = req.body.headline;
+		let snippet  = req.body.snippet;
+		let url      = req.body.url;
+		let imgUrl   = req.body.imgUrl;
 
-		var headline = req.body.headline;
-		var snippet  = req.body.snippet;
-		var url      = req.body.url;
-		var imgUrl   = req.body.imgUrl;
-		// var hearts   = req.body.hearts;
+		logger.info(headline, snippet, url, imgUrl);
 
-		console.log(headline, snippet, url);
-
-		var favArticle = new Favorite({
+		let favArticle = new Favorite({
 			headline: headline,
 			snippet: snippet,
 			url: url,
@@ -47,88 +31,77 @@ router.route("/favorites")
             userIps: req.headers['x-forwarded-for'] || req.connection.remoteAddress
 		});
 
-		favArticle.save(function (err) {
+		favArticle.save((err) => {
 
 			if (err) {
-				console.log(err);
+				logger.info(err);
 
-                Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
+                Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, ((err, data) => {
 
                     if (err) {
-                        console.error(err);
+                        logger.error(err);
                         res.send("ERROR ADDING HEART")
-                    }
-                    else {
-                        console.log(data);
+                    } else {
+                        logger.info(data);
                         res.send("HEART ADDED");
                     }
-                });
-			}
-
-			else {
-				console.log("Article Saved To Mongo @ " + now);
+                }));
+			} else {
+				logger.info("Article Saved To Mongo @ " + now);
                 res.send("ARTICLE SAVED: " + headline);
 			}
 		})
 
 	})
-	.get(function (req, res) {
+	.get((req, res) => {
+		logger.info("favorites GET route");
 
-		console.log("favorites GET route");
-
-		Favorite.find({}, function (err, data) {
+		Favorite.find({},((err, data) => {
 			if (err) {
-				console.log(err);
-			}
-			else {
-				console.log(data);
+				logger.info(err);
+			} else {
+				logger.info(data);
 			}
 			res.json(data)
-		});
+		}));
 	})
-    .put(function (req, res) {
-        console.log("PUT route working");
-        console.log(req.body.headline);
-        console.log(req.body.hearts);
+    .put((req, res) => {
+        logger.info("PUT route working");
+        logger.info(req.body.headline);
+        logger.info(req.body.hearts);
 
-        var headline = req.body.headline;
+        let headline = req.body.headline;
 
-        Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }}, function (err, data) {
+        Favorite.findOneAndUpdate({ headline: headline }, { $inc: { hearts: 1 }},((err, data) => {
             if (err) {
-                console.error(err);
+                logger.error(err);
+            } else {
+                logger.info(data);
             }
-            else {
-                console.log(data);
-            }
-        })
-
+        }));
     });
 
 router.route("/queries")
-    .post(function (req, res) {
+    .post((req, res) => {
+        logger.info("query post working!");
+        logger.info(req.body);
 
-        console.log("query post working!");
+        let query = req.body.searchQuery;
 
-        console.log(req.body);
-
-        var query = req.body.searchQuery;
-
-        var userQuery = new Query({
+        let userQuery = new Query({
             userQuery: query,
             userIp: req.headers['x-forwarded-for'] || req.connection.remoteAddress
         });
 
-        userQuery.save(function (err) {
+        userQuery.save((err) => {
             if (err) {
-                console.error(err);
+                logger.error(err);
                 res.send("ERROR ADDING QUERY: " + err)
-            }
-            else {
-                console.log("User Query Info Saved @ " + now);
+            } else {
+                logger.info("User Query Info Saved @ " + now);
                 res.send("QUERY ADDED: " + query)
             }
         })
-
     });
 
 module.exports = router;

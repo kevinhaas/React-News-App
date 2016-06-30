@@ -5,6 +5,7 @@
 import React from "react";
 import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
+// import console from "../../cfgs/console";
 import {Link} from "react-router";
 
 class FavoriteList extends React.Component {
@@ -12,11 +13,7 @@ class FavoriteList extends React.Component {
 		super(props);
 		this.state = {
 			favRes: [],
-			copied: false,
-			favline: "",
-			snippet: "",
-			url: "",
-			imgUrl: ""
+			copied: false
 		}
 	}
 
@@ -25,35 +22,38 @@ class FavoriteList extends React.Component {
 		this.getFavoriteArticles();
 	}
 
-	componentWillUnmount() {
-		console.log("favoriteList component unMounted")
-	}
+    // copies article URL to the clipboard //
+    copyUrlClick() {
+        toastr.success("URL copied to clipboard");
 
-	onChange() {
-	}
+        this.setState({
+            copied: true
+        });
+    }
 
-	handleClick(fav) {
+    // onClick for heart - adds 1 to that favorite's heart count //
+	addHeart(fav) {
 		console.log("heart +1 click working");
 
 		axios.post("/favorites", {
-			favline: fav.favline,
+			headline: fav.headline,
 			hearts: fav.hearts
 		})
-			.then(function (res) {
+			.then((res) => {
 
 				console.log(res);
 
 				if (res.data == "HEART ADDED") {
-					setTimeout(function() {
-						toastr.success("<3'd: " + fav.favline);
+					setTimeout(()  => {
+						toastr.success("<3'd: " + fav.headline);
 					}, 300)
 				}
 				else {
-					toastr.success("Added to Favorites: " + fav.favline);
+					toastr.success("Added to Favorites: " + fav.headline);
 				}
 
 			})
-			.catch(function (err) {
+			.catch((err) => {
 				console.error(err);
 			});
 
@@ -71,10 +71,6 @@ class FavoriteList extends React.Component {
 
 	}
 
-	handleSubmit(event) {
-
-	}
-
 	// fetches articles for the desired query //
 	// TODO: if articleRes === 0 then display no results message and prompt to search again //
 	getFavoriteArticles() {
@@ -87,7 +83,7 @@ class FavoriteList extends React.Component {
 					favRes: favs.data
 				});
 			})
-			.catch(function (error) {
+			.catch((error) => {
 				if (error.response) {
 					console.error(error.response.data);
 					console.error(error.response.status);
@@ -112,27 +108,27 @@ class FavoriteList extends React.Component {
 
                                 {fav.imgUrl === "no pic" ?
 
-                                    <a href={fav.web_url} target="#blank" className="media-left">
+                                    <a href={fav.url} target="#blank" className="media-left">
                                         <img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
                                     </a>
 
                                     :
 
-                                    <a href={fav.web_url} target="#blank" className="media-left">
+                                    <a href={fav.url} target="#blank" className="media-left">
                                         <img className="resImg" src={"https://nytimes.com/" + fav.imgUrl} />
                                     </a>
                                 }
 
 								<div className="media-body">
 
-									<i className="fa fa-heart" aria-hidden="true" onClick={this.handleClick.bind(this, fav)}>{fav.hearts}</i>
+									<i className="fa fa-heart" aria-hidden="true" onClick={this.addHeart.bind(this, fav)}>{fav.hearts}</i>
 
 									<CopyToClipboard text={fav.url}
-									                 onCopy={() => this.setState({copied: true})}>
+									                 onCopy={this.copyUrlClick.bind(this)}>
 										<i className="fa fa-share-alt" aria-hidden="true"></i>
 									</CopyToClipboard>
 
-									<a href={fav.url} target="#blank"><h4 className="media-faving"><strong>{fav.favline}</strong></h4></a>
+									<a href={fav.url} target="#blank"><h4 className="media-heading"><strong>{fav.headline}</strong></h4></a>
 									<small>{fav.snippet}</small>
 
 								</div>

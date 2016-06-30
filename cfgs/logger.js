@@ -2,16 +2,10 @@
  * Created by Kevo on 6/14/2016.
  */
 
-const winston = require("winston"),
-	  fs      = require("fs");
-
-// creates log file if it doesn't exist on server start
-// if (!fs.existsSync(process.cwd() + "/logs/all-logs.log")) {
-// 	fs.writeFileSync(process.cwd() + "/logs/all-logs.log");
-// }
+const winston = require("winston");
 
 // declare new winston instance & transports
-var logger = new(winston.Logger) ({
+let logger = new(winston.Logger) ({
 	level: "debug",
 	transports: [
 		new (winston.transports.Console) ({

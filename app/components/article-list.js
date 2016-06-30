@@ -5,6 +5,7 @@
 import React from "react";
 import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
+// import console from "../../cfgs/console";
 import {Link} from "react-router";
 
 class ArticleList extends React.Component {
@@ -13,10 +14,8 @@ class ArticleList extends React.Component {
         this.state = {
             articleRes: [],
             searchQuery: [],
-            copied: false,
             favRes: [],
-            imgUrl: [],
-            hearts: []
+            copied: false
         }
     }
 
@@ -25,74 +24,58 @@ class ArticleList extends React.Component {
         this.getLatestArticles();
     }
 
-    componentWillUnmount() {
-        console.log("articleList component unMounted")
-    }
-
     onChange(e) {
         this.setState({
             searchQuery: e.target.value
         });
     }
 
-    // addHeartClick() {
-    //     axios.get("/favorites")
-    //         .then((res) => {
-    //             console.log(res);
-    //
-    //             var heartData = [];
-    //
-    //             for (var i = 0; i < res.data.length; i++) {
-    //                 // console.log(res.data[i].headline);
-    //
-    //                 heartData.push(res.data[i].hearts)
-    //             }
-    //
-    //             console.log(heartData);
-    //
-    //             this.setState({
-    //                 favRes: res.data,
-    //                 hearts: heartData
-    //             });
-    //         })
-    // }
+    // copies article URL to the clipboard //
+    copyUrlClick() {
+        toastr.success("URL copied to clipboard");
 
-    addNewFavorite(head) {
+        this.setState({
+            copied: true
+        });
+    }
+
+    // IF an article has no heats, it gets added to favorites //
+    // IF an article has existing hearts, it gets another heart added to the total //
+    addNewFavorite(article) {
 
         console.log("heart'd!");
-        console.log(head.headline.main, head.snippet, head.web_url);
+        console.log(article.headline.main, article.snippet, article.web_url);
         console.log(this.refs.heartRef);
 
-        var imgUrl = "";
+        // check for valid imgUrl //
+        let imgUrl;
 
-        if (head.multimedia.length === 0) {
+        // IF no thumbnail for the article //
+        if (article.multimedia.length === 0) {
             imgUrl = "no pic"
-        }
-        else {
-            imgUrl = head.multimedia[0].url;
+        } else {
+            imgUrl = article.multimedia[0].url;
         }
 
+        // POST either new article or +1 heart to the favorites collection THEN display appropriate toastr and setState //
         axios.post("/favorites", {
-            headline: head.headline.main,
-            snippet: head.snippet,
-            url: head.web_url,
+            headline: article.headline.main,
+            snippet: article.snippet,
+            url: article.web_url,
             imgUrl: imgUrl
         })
-        .then(function (res) {
-
+        .then((res) => {
             console.log(res);
 
             if (res.data == "HEART ADDED") {
-                setTimeout(function() {
-                toastr.success("<3'd: " + head.headline.main);
+                setTimeout(() => {
+                toastr.success("<3'd: " + article.headline.main);
             }, 300)
+            } else {
+                toastr.success("Added to Favorites: " + article.headline.main);
             }
-            else {
-                toastr.success("Added to Favorites: " + head.headline.main);
-            }
-
         })
-        .catch(function (err) {
+        .catch((err) => {
             console.error(err);
         });
 
@@ -107,32 +90,23 @@ class ArticleList extends React.Component {
 
             })
         }, 1000);
-        }
-
-    copyUrlClick() {
-        console.log("URL copies to clipboard");
-        toastr.success("URL copied to clipboard");
-
-        this.setState({
-            copied: true
-        });
     }
 
+    // search button //
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state.searchQuery);
         this.getSearchArticles();
     }
 
     // grabs latest articles on page load //
     getLatestArticles() {
 
-        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+        let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
         url += "?" + $.param({
                 "api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
             });
 
-        axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fe6f6fe9125b4c14b9ab13721eaf350e")
+        axios.get(url)
             .then((res) => {
                 console.log(res.data.response.docs);
 
@@ -146,29 +120,18 @@ class ArticleList extends React.Component {
                     .then((res) => {
                         console.log(res);
 
-                        var heartData = [];
-
-                        for (var i = 0; i < res.data.length; i++) {
-                            // console.log(res.data[i].headline);
-
-                            heartData.push(res.data[i].hearts)
-                        }
-
-                        console.log(heartData);
-
                         this.setState({
-                            favRes: res.data,
-                            hearts: heartData
+                            favRes: res.data
                         });
                     })
             })
-            .catch(function (error) {
-                if (error.response) {
-                    console.error(error.response.data);
-                    console.error(error.response.status);
-                    console.error(error.response.headers);
+            .catch((err) => {
+                if (err.response) {
+                    console.error(err.response.data);
+                    console.error(err.response.status);
+                    console.error(err.response.headers);
                 } else {
-                    console.error("Error", error.message);
+                    console.error("Error", err.message);
                 }
             });
     }
@@ -177,7 +140,7 @@ class ArticleList extends React.Component {
     // TODO: if articleRes === 0 then display no results message and prompt to search again //
     getSearchArticles() {
 
-        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+        let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
         url += "?" + $.param({
                 "api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
                 "q"      : this.state.searchQuery
@@ -202,13 +165,13 @@ class ArticleList extends React.Component {
                 });
 
             })
-            .catch(function (error) {
+            .catch((err) => {
                 if (error.response) {
-                    console.error(error.response.data);
-                    console.error(error.response.status);
-                    console.error(error.response.headers);
+                    console.error(err.response.data);
+                    console.error(err.response.status);
+                    console.error(err.response.headers);
                 } else {
-                    console.error("Error", error.message);
+                    console.error("Error", err.message);
                 }
             });
     }
@@ -219,11 +182,7 @@ class ArticleList extends React.Component {
         console.log(this.state.favRes);
         console.log(this.props);
 
-        // for (var i = 0; i < this.state.hearts.length; i++) {
-        //     console.log(this.state.hearts[i]);
-        // }
-
-        let articleRender = this.state.articleRes.map((head, articleIndex) => {
+        let articleRender = this.state.articleRes.map((article, articleIndex) => {
 
                 return (
                     <div id="searchBody">
@@ -231,28 +190,28 @@ class ArticleList extends React.Component {
                         <div className="panel panel-default" id="resultPanel">
                             <div className="panel-body">
 
-                                <div key={head._id} className="media">
+                                <div key={article._id} className="media">
 
-                                    {head.multimedia.length === 0 ?
+                                    {article.multimedia.length === 0 ?
 
-                                        <a href={head.web_url} target="#blank" className="media-left">
+                                        <a href={article.web_url} target="#blank" className="media-left">
                                             <img className="placeHolderImg" src={"https://static01.nyt.com/images/icons/t_logo_291_black.png"} />
                                         </a>
 
                                         :
 
-                                        <a href={head.web_url} target="#blank" className="media-left">
-                                            <img className="resImg" src={"https://nytimes.com/" + head.multimedia[0].url} />
+                                        <a href={article.web_url} target="#blank" className="media-left">
+                                            <img className="resImg" src={"https://nytimes.com/" + article.multimedia[0].url} />
                                         </a>
                                     }
 
                                    <div className="media-body">
 
-                                       <i className="fa fa-heart" aria-hidden="true" onClick={this.addNewFavorite.bind(this, head)}>
+                                       <i className="fa fa-heart" aria-hidden="true" onClick={this.addNewFavorite.bind(this, article)}>
 
                                             {this.state.favRes.map((data, heartIndex) => {
 
-                                                return head.snippet == data.snippet ?
+                                                return article.snippet == data.snippet ?
 
                                                     <span ref="heartRef" key={data._id} id={heartIndex}>{data.hearts}</span>
 
@@ -263,12 +222,12 @@ class ArticleList extends React.Component {
 
                                        </i>
 
-                                       <CopyToClipboard text={head.web_url} onCopy={this.copyUrlClick.bind(this)}>
+                                       <CopyToClipboard text={article.web_url} onCopy={this.copyUrlClick.bind(this)}>
                                             <i className="fa fa-share-alt" aria-hidden="true"></i>
                                         </CopyToClipboard>
 
-                                        <a href={head.web_url} target="#blank"><h4 className="media-heading"><strong>{head.headline.main}</strong></h4></a>
-                                        <small>{head.snippet}</small>
+                                        <a href={article.web_url} target="#blank"><h4 className="media-heading"><strong>{article.headline.main}</strong></h4></a>
+                                        <small>{article.snippet}</small>
 
                                     </div>
 

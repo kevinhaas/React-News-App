@@ -9,6 +9,7 @@
 
 ### USER FILES ###
 *kevcfg*
+/app/stylesheets/main.css
 
 ### Bower ###
 bower_components

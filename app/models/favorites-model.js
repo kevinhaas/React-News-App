@@ -11,6 +11,9 @@ const Favorites = new mongoose.Schema({
 	imgUrl: String,
 	hearts: {type: Number, default: 0},
     userIps: [{type: String}]
+},
+{
+	timestamps: true
 });
 
 module.exports = mongoose.model("Favorites", Favorites);
