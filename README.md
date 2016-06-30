@@ -19,6 +19,7 @@
 <br />
 * Gulp
 * Less.js
+* Bower
 * Browserify
 * Winston
 * Swig
