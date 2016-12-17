@@ -32,7 +32,7 @@ class Footer extends React.Component {
                             <div className="col-sm-5">
                                 <p>Powered by <span id="nodeFooter"><strong>Node.js</strong></span>, <span id="mongoFooter"><strong>MongoDB</strong></span> and <span id="reactFooter"><strong>React</strong></span></p>
 
-                                <p>© 2016 Kevin Haas</p>
+                                <p>© 2016 <a href="http://kevhaas.com" target="#blank">Kevin Haas</a></p>
                             </div>
 
                         </div>

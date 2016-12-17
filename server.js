@@ -2,6 +2,8 @@
  * Created by Kevo on 6/14/2016.
  */
 
+"use strict"; 
+
 require("babel-register");
 const express        = require("express"),
 	  app            = express(),
@@ -28,7 +30,7 @@ db.once("open", (() => {
 }));
 
 // SERVER INITIALIZATION //
-const PORT = process.env.port || 5000,
+const PORT = process.env.port || 3012,
 	  server = http.createServer(app),
 	  io = require("socket.io")(server);
 

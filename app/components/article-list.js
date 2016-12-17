@@ -103,7 +103,7 @@ class ArticleList extends React.Component {
 
         let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
         url += "?" + $.param({
-                "api-key": "fe6f6fe9125b4c14b9ab13721eaf350e"
+                "api-key": "e051855bb5e34d84b7f68c0d9dcb7b58"
             });
 
         axios.get(url)
@@ -121,7 +121,7 @@ class ArticleList extends React.Component {
                         console.log(res);
 
                         this.setState({
-                            favRes: res.data
+                           favRes: res.data
                         });
                     })
             })
@@ -142,15 +142,15 @@ class ArticleList extends React.Component {
 
         let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
         url += "?" + $.param({
-                "api-key": "fe6f6fe9125b4c14b9ab13721eaf350e",
+                "api-key": "e051855bb5e34d84b7f68c0d9dcb7b58",
                 "q"      : this.state.searchQuery
             });
 
         // IF no query is defined, set URL to getLatestArticle() URL //
         if (this.state.searchQuery == "") {
-            url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=fe6f6fe9125b4c14b9ab13721eaf350e"
+            url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=e051855bb5e34d84b7f68c0d9dcb7b58"
         }
-
+	
         axios.get(url)
             .then((res) => {
                 console.log(res.data.response.docs);

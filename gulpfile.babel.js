@@ -4,6 +4,8 @@
 
 // .less build/watch currently disabled at the bottom and removed from build/default tasks
 
+"use strict";
+
 const gulp         = require("gulp"),
 	  gutil        = require("gulp-util"),
 	  gulpif       = require("gulp-if"),
