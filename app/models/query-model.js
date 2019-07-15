@@ -4,12 +4,14 @@
 
 const mongoose = require("mongoose");
 
-const Queries = new mongoose.Schema({
+const Queries = new mongoose.Schema(
+  {
     userQuery: String,
     userIp: String
-},
-{
+  },
+  {
     timestamps: true
-});
+  }
+);
 
 module.exports = mongoose.model("Queries", Queries);

@@ -5,27 +5,27 @@
 const winston = require("winston");
 
 // declare new winston instance & transports
-let logger = new(winston.Logger) ({
-	level: "debug",
-	transports: [
-		new (winston.transports.Console) ({
-			prettyPrint: true,
-			colorize: true
-		}),
-		new (winston.transports.File) ({
-			filename: "./logs/all-logs.log",
-			handleExceptions: true,
-			prettyPrint: true
-		})
-	]
+let logger = new winston.Logger({
+  level: "debug",
+  transports: [
+    new winston.transports.Console({
+      prettyPrint: true,
+      colorize: true
+    }),
+    new winston.transports.File({
+      filename: "./logs/all-logs.log",
+      handleExceptions: true,
+      prettyPrint: true
+    })
+  ]
 });
 
 winston.addColors({
-	debug: "green",
-	info: "cyan",
-	silly: "magenta",
-	warn: "yellow",
-	error: "red"
+  debug: "green",
+  info: "cyan",
+  silly: "magenta",
+  warn: "yellow",
+  error: "red"
 });
 
 // logger.info("test");
