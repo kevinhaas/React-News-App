@@ -165,7 +165,7 @@ class ArticleList extends React.Component {
   render() {
     let articleRender = this.state.articleRes.map((article, articleIndex) => {
       return (
-        <div id="searchBody">
+        <div id="searchBody" key={articleIndex}>
           <div className="panel panel-default" id="resultPanel">
             <div className="panel-body">
               <div key={article._id} className="media">
