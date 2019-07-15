@@ -129,14 +129,13 @@ class ArticleList extends React.Component {
     url +=
       "?" +
       $.param({
-        "api-key": "e051855bb5e34d84b7f68c0d9dcb7b58",
+        "api-key": nytApiKey,
         q: this.state.searchQuery
       });
 
     // IF no query is defined, set URL to getLatestArticle() URL //
     if (this.state.searchQuery == "") {
-      url =
-        "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=e051855bb5e34d84b7f68c0d9dcb7b58";
+      url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${nytApiKey}`;
     }
 
     axios
