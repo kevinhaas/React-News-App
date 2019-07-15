@@ -5,7 +5,7 @@
 import React from "react";
 import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
-import console from "../../cfgs/kevcfg";
+import { nytApiKey } from "../../cfgs/kevcfg";
 import {Link} from "react-router";
 
 class ArticleList extends React.Component {
@@ -103,7 +103,7 @@ class ArticleList extends React.Component {
 
         let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
         url += "?" + $.param({
-                "api-key": kevcfg.nytApiKey
+                "api-key": nytApiKey
             });
 
         axios.get(url)
